@@ -1,0 +1,16 @@
+node_modules/
+.local/
+.env
+.env.*
+*.log
+tmp/
+entrega/*.zip
+entrega/*-preview*.png
+evidence/private-*
+entrega/informe.pdf
+
+# Entrega privada para Canvas; no publicar identificación personal ni duplicados.
+/entrega/
+/*.docx
+/docs/plan.md
+/docs/verificacion-enlaces.md

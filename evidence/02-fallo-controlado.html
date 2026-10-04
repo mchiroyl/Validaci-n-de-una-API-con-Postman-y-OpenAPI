@@ -1,0 +1,127 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><title>Evidencia 02-fallo-controlado</title><style>body{font:16px system-ui;margin:32px;background:#f4f6fa;color:#172437}h1{font-size:25px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:24px;border:1px solid #d5dce6;border-radius:12px;line-height:1.5}</style><h1>Ejecución real: 02-fallo-controlado</h1><pre>VALIDACIÓN API PEDIDOS - 02-fallo-controlado
+Fecha UTC: 2026-10-04T05:48:48.880Z
+Node v24.19.0 | Newman 6.2.2 | Colección 2.1.0 | OpenAPI 3.1.0
+Casos ejecutados: 12/12 | aprobados: 8 | fallidos: 4
+Solicitudes principales: 14 (12 casos + SETUP + CLEANUP)
+Interacciones de pedidos con validación adicional: 24
+Aserciones: 91 | fallidas: 7 | cuerpos incompatibles Ajv: 4
+Salida equivalente del runner: 1
+SHA256 contrato: 0fcf960f95ed385d12abfb96d0cbce7d3e2585d6c9362c1a82b9be3b56ade382
+SHA256 API: 56850c87bde16fff1e19eba693804b3b81a31d31e85c14607a7f4487a878d2bc
+
+SETUP | datos limpios y sesiones efímeras | HTTP 200
+  PASS SETUP | estado HTTP 200
+  PASS SETUP | Content-Type JSON
+  PASS SETUP | esquema Fixture
+  PASS SETUP | 3 propios y 1 ajeno
+TC01 | Paginación válida y aislamiento | HTTP 200
+  PASS TC01 | estado HTTP 200
+  PASS TC01 | Content-Type JSON
+  PASS TC01 | esquema OrderPage
+  PASS TC01 | primera página y propietario
+  PASS TC01 | lectura posterior disponible /orders?page=2&amp;limit=2
+  PASS TC01 | esquema segunda página
+  PASS TC01 | segunda página completa sin duplicados
+TC02 | Página inválida | HTTP 400
+  PASS TC02 | estado HTTP 400
+  PASS TC02 | Content-Type JSON
+  PASS TC02 | esquema Error
+  PASS TC02 | código VALIDATION_ERROR
+TC03 | Crear pedido válido | HTTP 201
+  PASS TC03 | estado HTTP 201
+  PASS TC03 | Content-Type JSON
+  PASS TC03 | esquema Order
+  PASS TC03 | valores iniciales e importe calculado
+  PASS TC03 | Location del recurso
+  PASS TC03 | lectura posterior disponible /orders?limit=20
+  PASS TC03 | esquema listado posterior
+  PASS TC03 | sin creaciones adicionales
+TC04 | Consultar creación persistida | HTTP 200
+  PASS TC04 | estado HTTP 200
+  PASS TC04 | Content-Type JSON
+  FAIL TC04 | esquema Order -&gt; expected data to satisfy schema but found following errors:
+data.total should be number
+  FAIL TC04 | creación persistida correcta -&gt; expected &#39;50&#39; to equal 50
+TC05 | Cantidad inválida sin efecto | HTTP 400
+  PASS TC05 | estado HTTP 400
+  PASS TC05 | Content-Type JSON
+  PASS TC05 | esquema Error
+  PASS TC05 | código VALIDATION_ERROR
+  PASS TC05 | lectura posterior disponible /orders?limit=20
+  PASS TC05 | esquema listado posterior
+  PASS TC05 | sin creaciones adicionales
+TC06 | Campo obligatorio ausente | HTTP 400
+  PASS TC06 | estado HTTP 400
+  PASS TC06 | Content-Type JSON
+  PASS TC06 | esquema Error
+  PASS TC06 | código VALIDATION_ERROR
+  PASS TC06 | lectura posterior disponible /orders?limit=20
+  PASS TC06 | esquema listado posterior
+  PASS TC06 | sin creaciones adicionales
+TC07 | Sin credenciales | HTTP 401
+  PASS TC07 | estado HTTP 401
+  PASS TC07 | Content-Type JSON
+  PASS TC07 | esquema Error
+  PASS TC07 | código UNAUTHORIZED
+  PASS TC07 | desafío Bearer
+TC08 | Credencial inválida | HTTP 401
+  PASS TC08 | estado HTTP 401
+  PASS TC08 | Content-Type JSON
+  PASS TC08 | esquema Error
+  PASS TC08 | código UNAUTHORIZED
+  PASS TC08 | desafío Bearer
+TC09 | Acceso y modificación de pedido ajeno | HTTP 403
+  PASS TC09 | estado HTTP 403
+  PASS TC09 | Content-Type JSON
+  PASS TC09 | esquema Error
+  PASS TC09 | código FORBIDDEN
+  PASS TC09 | confirmación ajena prohibida
+  PASS TC09 | esquema confirmación prohibida
+  PASS TC09 | lectura posterior disponible /orders/eb0883e3-5ec3-4572-a668-e6d8ea86f6c1
+  FAIL TC09 | esquema lectura autorizada B -&gt; expected data to satisfy schema but found following errors:
+data.total should be number
+  PASS TC09 | pedido ajeno sin efecto
+TC10 | Recurso inexistente | HTTP 404
+  PASS TC10 | estado HTTP 404
+  PASS TC10 | Content-Type JSON
+  PASS TC10 | esquema Error
+  PASS TC10 | código NOT_FOUND
+TC11 | Confirmar borrador y verificar cambio | HTTP 200
+  PASS TC11 | estado HTTP 200
+  PASS TC11 | Content-Type JSON
+  PASS TC11 | esquema Order
+  PASS TC11 | primera confirmación
+  PASS TC11 | lectura posterior disponible /orders/da36041c-4010-4e73-95be-ecec7ce575b0
+  FAIL TC11 | esquema confirmación persistida -&gt; expected data to satisfy schema but found following errors:
+data.total should be number
+  FAIL TC11 | efecto persistido -&gt; expected { …(9) } to deeply equal { …(9) }
+TC12 | Repetir confirmación: efecto final idempotente | HTTP 200
+  PASS TC12 | estado HTTP 200
+  PASS TC12 | Content-Type JSON
+  PASS TC12 | esquema Order
+  PASS TC12 | esquema PUT repetido
+  PASS TC12 | PUT repetido mantiene efecto único
+  PASS TC12 | lectura posterior disponible /orders/da36041c-4010-4e73-95be-ecec7ce575b0
+  FAIL TC12 | esquema lectura final -&gt; expected data to satisfy schema but found following errors:
+data.total should be number
+  FAIL TC12 | lectura final mantiene efecto único -&gt; expected &#39;50&#39; to equal 50
+  PASS TC12 | lectura posterior disponible /orders?limit=20
+  PASS TC12 | esquema listado posterior
+  PASS TC12 | sin creaciones adicionales
+CLEANUP | eliminar pedido de la corrida y comprobar | HTTP 200
+  PASS CLEANUP | estado HTTP 200
+  PASS CLEANUP | Content-Type JSON
+  PASS CLEANUP | esquema Deleted
+  PASS CLEANUP | eliminado ID actual
+  PASS CLEANUP | lectura final 404
+  PASS CLEANUP | esquema recurso eliminado
+  PASS CLEANUP | lectura posterior disponible /orders?limit=20
+  PASS CLEANUP | esquema limpieza
+  PASS CLEANUP | vuelve al estado inicial
+
+AJV FAIL GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0 HTTP 200: [{&quot;instancePath&quot;:&quot;/total&quot;,&quot;schemaPath&quot;:&quot;#/properties/total/type&quot;,&quot;keyword&quot;:&quot;type&quot;,&quot;params&quot;:{&quot;type&quot;:&quot;number&quot;},&quot;message&quot;:&quot;must be number&quot;}]
+AJV FAIL GET /orders/eb0883e3-5ec3-4572-a668-e6d8ea86f6c1 HTTP 200: [{&quot;instancePath&quot;:&quot;/total&quot;,&quot;schemaPath&quot;:&quot;#/properties/total/type&quot;,&quot;keyword&quot;:&quot;type&quot;,&quot;params&quot;:{&quot;type&quot;:&quot;number&quot;},&quot;message&quot;:&quot;must be number&quot;}]
+AJV FAIL GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0 HTTP 200: [{&quot;instancePath&quot;:&quot;/total&quot;,&quot;schemaPath&quot;:&quot;#/properties/total/type&quot;,&quot;keyword&quot;:&quot;type&quot;,&quot;params&quot;:{&quot;type&quot;:&quot;number&quot;},&quot;message&quot;:&quot;must be number&quot;}]
+AJV FAIL GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0 HTTP 200: [{&quot;instancePath&quot;:&quot;/total&quot;,&quot;schemaPath&quot;:&quot;#/properties/total/type&quot;,&quot;keyword&quot;:&quot;type&quot;,&quot;params&quot;:{&quot;type&quot;:&quot;number&quot;},&quot;message&quot;:&quot;must be number&quot;}]
+
+Alcance: aserciones funcionales y validación de cuerpos. No certifica todas las operaciones o reglas de OpenAPI.</pre></html>

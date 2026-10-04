@@ -2,8 +2,6 @@
 
 Proyecto académico de una API local de pedidos para comprobar reglas funcionales y contratos mediante una colección automatizada de Postman. Utiliza Node.js, datos sintéticos y dos usuarios de prueba. No requiere una interfaz gráfica ni despliegue público.
 
-**Estado de publicación:** este repositorio contiene inicialmente la documentación. El código, la colección y la evidencia descritos se encuentran preparados en el proyecto local y su publicación está pendiente. Las instrucciones siguientes requieren esos archivos.
-
 ## Funcionalidad y cobertura
 
 La API permite listar pedidos con paginación, crear y consultar pedidos protegidos y confirmar un pedido mediante una operación idempotente.

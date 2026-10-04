@@ -1,0 +1,5 @@
+--- a/src/api.mjs
++++ b/src/api.mjs
+@@ GET /orders/{id}: incompatibilidad local @@
+-          if (!match[2] && req.method === 'GET') return send(200, order);
++          if (!match[2] && req.method === 'GET') return send(200, { ...order, total: String(order.total) });

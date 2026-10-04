@@ -1,0 +1,27 @@
+{
+  "generatedAt": "2026-10-04T05:48:51.169Z",
+  "expectedCases": 12,
+  "baseline": {
+    "passed": 12,
+    "failed": 0,
+    "assertions": 91,
+    "exitCode": 0
+  },
+  "broken": {
+    "passed": 8,
+    "failed": 4,
+    "assertions": 91,
+    "assertionFailures": 7,
+    "exitCode": 1,
+    "detectedBy": "TC04 | esquema Order"
+  },
+  "corrected": {
+    "passed": 12,
+    "failed": 0,
+    "assertions": 91,
+    "exitCode": 0
+  },
+  "contractUnchanged": true,
+  "sourceRestored": true,
+  "contractSha256": "0fcf960f95ed385d12abfb96d0cbce7d3e2585d6c9362c1a82b9be3b56ade382"
+}

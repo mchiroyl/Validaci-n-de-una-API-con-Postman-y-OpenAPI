@@ -1,0 +1,213 @@
+{
+  "executedAt": "2026-10-04T05:15:25.529Z",
+  "command": "npm audit --json",
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 1,
+      "high": 6,
+      "critical": 0,
+      "total": 7
+    },
+    "dependencies": {
+      "prod": 1,
+      "dev": 162,
+      "optional": 2,
+      "peer": 1,
+      "peerOptional": 0,
+      "total": 162
+    }
+  },
+  "vulnerabilities": {
+    "@faker-js/faker": {
+      "name": "@faker-js/faker",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1158500,
+          "name": "@faker-js/faker",
+          "dependency": "@faker-js/faker",
+          "title": "Faker: helpers.fake exploitable into arbritary code execution",
+          "url": "https://github.com/advisories/GHSA-qxc2-j82w-r537",
+          "severity": "high",
+          "cwe": [
+            "CWE-95"
+          ],
+          "cvss": {
+            "score": 7.8,
+            "vectorString": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": "<=10.4.0"
+        }
+      ],
+      "effects": [
+        "postman-collection"
+      ],
+      "range": "<=10.4.0",
+      "nodes": [
+        "node_modules/@faker-js/faker"
+      ],
+      "fixAvailable": {
+        "name": "newman",
+        "version": "4.6.1",
+        "isSemVerMajor": true
+      }
+    },
+    "csv-parse": {
+      "name": "csv-parse",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1193670,
+          "name": "csv-parse",
+          "dependency": "csv-parse",
+          "title": "node-csv: Prototype replacement still reachable via columns path",
+          "url": "https://github.com/advisories/GHSA-8cw4-87c7-c6xx",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<7.0.2"
+        }
+      ],
+      "effects": [
+        "newman"
+      ],
+      "range": "<7.0.2",
+      "nodes": [
+        "node_modules/csv-parse"
+      ],
+      "fixAvailable": {
+        "name": "newman",
+        "version": "4.6.1",
+        "isSemVerMajor": true
+      }
+    },
+    "newman": {
+      "name": "newman",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "csv-parse",
+        "postman-collection",
+        "postman-runtime"
+      ],
+      "effects": [],
+      "range": "3.0.0-beta.1 - 4.5.4 || >=5.0.0",
+      "nodes": [
+        "node_modules/newman"
+      ],
+      "fixAvailable": {
+        "name": "newman",
+        "version": "4.6.1",
+        "isSemVerMajor": true
+      }
+    },
+    "node-forge": {
+      "name": "node-forge",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1240912,
+          "name": "node-forge",
+          "dependency": "node-forge",
+          "title": "node-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements",
+          "url": "https://github.com/advisories/GHSA-86w9-cpqp-85rv",
+          "severity": "high",
+          "cwe": [
+            "CWE-347"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+          },
+          "range": "<=1.4.0"
+        }
+      ],
+      "effects": [
+        "postman-runtime"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/node-forge"
+      ],
+      "fixAvailable": {
+        "name": "newman",
+        "version": "4.6.1",
+        "isSemVerMajor": true
+      }
+    },
+    "postman-collection": {
+      "name": "postman-collection",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@faker-js/faker"
+      ],
+      "effects": [
+        "newman",
+        "postman-runtime",
+        "postman-sandbox"
+      ],
+      "range": ">=4.1.2",
+      "nodes": [
+        "node_modules/postman-collection"
+      ],
+      "fixAvailable": {
+        "name": "newman",
+        "version": "4.6.1",
+        "isSemVerMajor": true
+      }
+    },
+    "postman-runtime": {
+      "name": "postman-runtime",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "node-forge",
+        "postman-collection",
+        "postman-sandbox"
+      ],
+      "effects": [
+        "newman"
+      ],
+      "range": "6.4.2 - 7.0.0-beta.2 || 7.4.0-beta.1 - 7.4.0 || >=7.29.1",
+      "nodes": [
+        "node_modules/postman-runtime"
+      ],
+      "fixAvailable": {
+        "name": "newman",
+        "version": "4.6.1",
+        "isSemVerMajor": true
+      }
+    },
+    "postman-sandbox": {
+      "name": "postman-sandbox",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "postman-collection"
+      ],
+      "effects": [
+        "postman-runtime"
+      ],
+      "range": ">=4.1.2",
+      "nodes": [
+        "node_modules/postman-sandbox"
+      ],
+      "fixAvailable": {
+        "name": "newman",
+        "version": "4.6.1",
+        "isSemVerMajor": true
+      }
+    }
+  }
+}

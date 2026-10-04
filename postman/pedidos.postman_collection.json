@@ -1,0 +1,699 @@
+{
+  "info": {
+    "_postman_id": "3852e08e-d54e-4715-a52b-1b6963559db7",
+    "name": "Pedidos | 12 casos de contrato y reglas",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Ejecutar completa, en orden, con 1 iteración. SETUP reinicia fixtures; CLEANUP comprueba efecto y borra variables. 12 situaciones TC01..TC12; solicitudes auxiliares y lecturas posteriores no son casos extra. Esquemas derivados del contrato OpenAPI 3.1, validación del cuerpo; no validador completo OpenAPI. Usar solo API local de demo. No exportar sesiones ni informes crudos."
+  },
+  "variable": [
+    {
+      "key": "schemas",
+      "value": "{\"CreateOrder\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"product\",\"quantity\"],\"properties\":{\"product\":{\"type\":\"string\",\"enum\":[\"CUADERNO\"]},\"quantity\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":10}}},\"Order\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"id\",\"owner\",\"product\",\"quantity\",\"total\",\"status\",\"confirmationCount\",\"createdAt\",\"confirmedAt\"],\"properties\":{\"id\":{\"type\":\"string\",\"format\":\"uuid\",\"pattern\":\"^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$\"},\"owner\":{\"type\":\"string\",\"enum\":[\"usuario_a\",\"usuario_b\"]},\"product\":{\"type\":\"string\",\"enum\":[\"CUADERNO\"]},\"quantity\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":10},\"total\":{\"type\":\"number\",\"minimum\":25,\"maximum\":250,\"multipleOf\":25},\"status\":{\"type\":\"string\",\"enum\":[\"draft\",\"confirmed\"]},\"confirmationCount\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":1},\"createdAt\":{\"type\":\"string\",\"format\":\"date-time\"},\"confirmedAt\":{\"anyOf\":[{\"type\":\"string\",\"format\":\"date-time\"},{\"type\":\"null\"}]}}},\"OrderPage\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"items\",\"page\",\"limit\",\"total\",\"totalPages\"],\"properties\":{\"items\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"id\",\"owner\",\"product\",\"quantity\",\"total\",\"status\",\"confirmationCount\",\"createdAt\",\"confirmedAt\"],\"properties\":{\"id\":{\"type\":\"string\",\"format\":\"uuid\",\"pattern\":\"^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$\"},\"owner\":{\"type\":\"string\",\"enum\":[\"usuario_a\",\"usuario_b\"]},\"product\":{\"type\":\"string\",\"enum\":[\"CUADERNO\"]},\"quantity\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":10},\"total\":{\"type\":\"number\",\"minimum\":25,\"maximum\":250,\"multipleOf\":25},\"status\":{\"type\":\"string\",\"enum\":[\"draft\",\"confirmed\"]},\"confirmationCount\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":1},\"createdAt\":{\"type\":\"string\",\"format\":\"date-time\"},\"confirmedAt\":{\"anyOf\":[{\"type\":\"string\",\"format\":\"date-time\"},{\"type\":\"null\"}]}}}},\"page\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":1000000},\"limit\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":20},\"total\":{\"type\":\"integer\",\"minimum\":0},\"totalPages\":{\"type\":\"integer\",\"minimum\":0}}},\"Deleted\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"deleted\",\"id\"],\"properties\":{\"deleted\":{\"type\":\"boolean\",\"enum\":[true]},\"id\":{\"type\":\"string\",\"format\":\"uuid\",\"pattern\":\"^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$\"}}},\"Error\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"error\"],\"properties\":{\"error\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"code\",\"message\"],\"properties\":{\"code\":{\"type\":\"string\",\"enum\":[\"VALIDATION_ERROR\",\"UNAUTHORIZED\",\"FORBIDDEN\",\"NOT_FOUND\",\"PAYLOAD_TOO_LARGE\",\"UNSUPPORTED_MEDIA_TYPE\",\"METHOD_NOT_ALLOWED\",\"INTERNAL_ERROR\"]},\"message\":{\"type\":\"string\",\"minLength\":1}}}}},\"Fixture\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"users\",\"tokens\",\"ownIds\",\"foreignId\"],\"properties\":{\"users\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"enum\":[\"usuario_a\",\"usuario_b\"]},\"minItems\":2,\"maxItems\":2},\"tokens\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"usuario_a\",\"usuario_b\"],\"properties\":{\"usuario_a\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{64}$\"},\"usuario_b\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{64}$\"}}},\"ownIds\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"format\":\"uuid\",\"pattern\":\"^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$\"},\"minItems\":3,\"maxItems\":3},\"foreignId\":{\"type\":\"string\",\"format\":\"uuid\",\"pattern\":\"^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$\"}}}}",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "SETUP | datos limpios y sesiones efímeras",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [],
+        "url": "{{baseUrl}}/__demo/prepare"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = 'SETUP';",
+              "const schemas = JSON.parse(pm.collectionVariables.get('schemas'));",
+              "pm.test(id + ' | estado HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test(id + ' | Content-Type JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.match(/^application\\/json/));",
+              "pm.test(id + ' | esquema Fixture', () => pm.response.to.have.jsonSchema(schemas.Fixture));",
+              "const body = pm.response.json();",
+              "",
+              "pm.environment.set('tokenA', body.tokens.usuario_a);",
+              "pm.environment.set('tokenB', body.tokens.usuario_b);",
+              "pm.environment.set('ownIds', JSON.stringify(body.ownIds));",
+              "pm.environment.set('foreignId', body.foreignId);",
+              "['createdId','expectedIds','confirmedAt'].forEach(k=>pm.environment.unset(k));",
+              "pm.test('SETUP | 3 propios y 1 ajeno', () => { pm.expect(body.ownIds).to.have.lengthOf(3); pm.expect(body.users).to.eql(['usuario_a','usuario_b']); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC01 | Paginación válida y aislamiento",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{tokenA}}"
+          }
+        ],
+        "url": "{{baseUrl}}/orders?page=1&limit=2"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = 'TC01';",
+              "const schemas = JSON.parse(pm.collectionVariables.get('schemas'));",
+              "pm.test(id + ' | estado HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test(id + ' | Content-Type JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.match(/^application\\/json/));",
+              "pm.test(id + ' | esquema OrderPage', () => pm.response.to.have.jsonSchema(schemas.OrderPage));",
+              "const body = pm.response.json();",
+              "",
+              "function get(path, token, fn) {",
+              "  pm.sendRequest({url: pm.environment.get('baseUrl') + path, method:'GET', header:{Authorization:'Bearer '+pm.environment.get(token)}}, (err,res) => {",
+              "    pm.test(id+' | lectura posterior disponible '+path, () => {pm.expect(err).to.equal(null); pm.expect(res.code).to.equal(200);});",
+              "    if (!err && res) fn(res.json());",
+              "  });",
+              "}",
+              "function checkSchema(value, name, label) {",
+              "  pm.test(id+' | esquema '+label, () => pm.expect(value).to.have.jsonSchema(schemas[name]));",
+              "}",
+              "function checkIds(value) {",
+              "  checkSchema(value, 'OrderPage', 'listado posterior');",
+              "  pm.test(id+' | sin creaciones adicionales', () => {",
+              "    pm.expect(value.total).to.equal(4);",
+              "    pm.expect(value.items.map(x=>x.id).sort()).to.eql(JSON.parse(pm.environment.get('expectedIds')).sort());",
+              "    value.items.forEach(x=>pm.expect(x.owner).to.equal('usuario_a'));",
+              "  });",
+              "}",
+              "pm.test(id+' | primera página y propietario', () => { pm.expect(body.page).to.equal(1); pm.expect(body.limit).to.equal(2); pm.expect(body.total).to.equal(3); pm.expect(body.totalPages).to.equal(2); pm.expect(body.items).to.have.lengthOf(2); body.items.forEach(x=>pm.expect(x.owner).to.equal('usuario_a')); });",
+              "get('/orders?page=2&limit=2','tokenA', page2 => {",
+              " checkSchema(page2,'OrderPage','segunda página');",
+              " pm.test(id+' | segunda página completa sin duplicados', () => {",
+              "  pm.expect(page2.page).to.equal(2); pm.expect(page2.limit).to.equal(2); pm.expect(page2.total).to.equal(3); pm.expect(page2.totalPages).to.equal(2); pm.expect(page2.items).to.have.lengthOf(1);",
+              "  const ids = body.items.concat(page2.items).map(x=>x.id);",
+              "  pm.expect(new Set(ids).size).to.equal(3); pm.expect(ids.sort()).to.eql(JSON.parse(pm.environment.get('ownIds')).sort());",
+              "  page2.items.forEach(x=>pm.expect(x.owner).to.equal('usuario_a'));",
+              " });",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC02 | Página inválida",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{tokenA}}"
+          }
+        ],
+        "url": "{{baseUrl}}/orders?page=0&limit=2"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = 'TC02';",
+              "const schemas = JSON.parse(pm.collectionVariables.get('schemas'));",
+              "pm.test(id + ' | estado HTTP 400', () => pm.response.to.have.status(400));",
+              "pm.test(id + ' | Content-Type JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.match(/^application\\/json/));",
+              "pm.test(id + ' | esquema Error', () => pm.response.to.have.jsonSchema(schemas.Error));",
+              "const body = pm.response.json();",
+              "pm.test(id+' | código VALIDATION_ERROR', () => pm.expect(body.error.code).to.equal('VALIDATION_ERROR'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC03 | Crear pedido válido",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{tokenA}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/orders",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"product\":\"CUADERNO\",\"quantity\":2}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = 'TC03';",
+              "const schemas = JSON.parse(pm.collectionVariables.get('schemas'));",
+              "pm.test(id + ' | estado HTTP 201', () => pm.response.to.have.status(201));",
+              "pm.test(id + ' | Content-Type JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.match(/^application\\/json/));",
+              "pm.test(id + ' | esquema Order', () => pm.response.to.have.jsonSchema(schemas.Order));",
+              "const body = pm.response.json();",
+              "",
+              "function get(path, token, fn) {",
+              "  pm.sendRequest({url: pm.environment.get('baseUrl') + path, method:'GET', header:{Authorization:'Bearer '+pm.environment.get(token)}}, (err,res) => {",
+              "    pm.test(id+' | lectura posterior disponible '+path, () => {pm.expect(err).to.equal(null); pm.expect(res.code).to.equal(200);});",
+              "    if (!err && res) fn(res.json());",
+              "  });",
+              "}",
+              "function checkSchema(value, name, label) {",
+              "  pm.test(id+' | esquema '+label, () => pm.expect(value).to.have.jsonSchema(schemas[name]));",
+              "}",
+              "function checkIds(value) {",
+              "  checkSchema(value, 'OrderPage', 'listado posterior');",
+              "  pm.test(id+' | sin creaciones adicionales', () => {",
+              "    pm.expect(value.total).to.equal(4);",
+              "    pm.expect(value.items.map(x=>x.id).sort()).to.eql(JSON.parse(pm.environment.get('expectedIds')).sort());",
+              "    value.items.forEach(x=>pm.expect(x.owner).to.equal('usuario_a'));",
+              "  });",
+              "}",
+              "pm.environment.set('createdId', body.id);",
+              "pm.environment.set('expectedIds', JSON.stringify(JSON.parse(pm.environment.get('ownIds')).concat(body.id)));",
+              "pm.test(id+' | valores iniciales e importe calculado', () => { pm.expect(body.owner).to.equal('usuario_a'); pm.expect(body.product).to.equal('CUADERNO'); pm.expect(body.quantity).to.equal(2); pm.expect(body.total).to.equal(50); pm.expect(body.status).to.equal('draft'); pm.expect(body.confirmationCount).to.equal(0); pm.expect(body.confirmedAt).to.equal(null); pm.expect(JSON.parse(pm.environment.get('ownIds'))).not.to.include(body.id); });",
+              "pm.test(id+' | Location del recurso', () => pm.expect(pm.response.headers.get('Location')).to.equal('/orders/'+body.id));",
+              "get('/orders?limit=20','tokenA', checkIds);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC04 | Consultar creación persistida",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{tokenA}}"
+          }
+        ],
+        "url": "{{baseUrl}}/orders/{{createdId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = 'TC04';",
+              "const schemas = JSON.parse(pm.collectionVariables.get('schemas'));",
+              "pm.test(id + ' | estado HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test(id + ' | Content-Type JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.match(/^application\\/json/));",
+              "pm.test(id + ' | esquema Order', () => pm.response.to.have.jsonSchema(schemas.Order));",
+              "const body = pm.response.json();",
+              "pm.test(id+' | creación persistida correcta', () => { pm.expect(body.id).to.equal(pm.environment.get('createdId')); pm.expect(body.owner).to.equal('usuario_a'); pm.expect(body.product).to.equal('CUADERNO'); pm.expect(body.quantity).to.equal(2); pm.expect(body.total).to.equal(50); pm.expect(body.status).to.equal('draft'); pm.expect(body.confirmationCount).to.equal(0); pm.expect(body.confirmedAt).to.equal(null); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC05 | Cantidad inválida sin efecto",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{tokenA}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/orders",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"product\":\"CUADERNO\",\"quantity\":0}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = 'TC05';",
+              "const schemas = JSON.parse(pm.collectionVariables.get('schemas'));",
+              "pm.test(id + ' | estado HTTP 400', () => pm.response.to.have.status(400));",
+              "pm.test(id + ' | Content-Type JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.match(/^application\\/json/));",
+              "pm.test(id + ' | esquema Error', () => pm.response.to.have.jsonSchema(schemas.Error));",
+              "const body = pm.response.json();",
+              "pm.test(id+' | código VALIDATION_ERROR', () => pm.expect(body.error.code).to.equal('VALIDATION_ERROR'));",
+              "",
+              "",
+              "function get(path, token, fn) {",
+              "  pm.sendRequest({url: pm.environment.get('baseUrl') + path, method:'GET', header:{Authorization:'Bearer '+pm.environment.get(token)}}, (err,res) => {",
+              "    pm.test(id+' | lectura posterior disponible '+path, () => {pm.expect(err).to.equal(null); pm.expect(res.code).to.equal(200);});",
+              "    if (!err && res) fn(res.json());",
+              "  });",
+              "}",
+              "function checkSchema(value, name, label) {",
+              "  pm.test(id+' | esquema '+label, () => pm.expect(value).to.have.jsonSchema(schemas[name]));",
+              "}",
+              "function checkIds(value) {",
+              "  checkSchema(value, 'OrderPage', 'listado posterior');",
+              "  pm.test(id+' | sin creaciones adicionales', () => {",
+              "    pm.expect(value.total).to.equal(4);",
+              "    pm.expect(value.items.map(x=>x.id).sort()).to.eql(JSON.parse(pm.environment.get('expectedIds')).sort());",
+              "    value.items.forEach(x=>pm.expect(x.owner).to.equal('usuario_a'));",
+              "  });",
+              "}",
+              "get('/orders?limit=20','tokenA', checkIds);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC06 | Campo obligatorio ausente",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{tokenA}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/orders",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"product\":\"CUADERNO\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = 'TC06';",
+              "const schemas = JSON.parse(pm.collectionVariables.get('schemas'));",
+              "pm.test(id + ' | estado HTTP 400', () => pm.response.to.have.status(400));",
+              "pm.test(id + ' | Content-Type JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.match(/^application\\/json/));",
+              "pm.test(id + ' | esquema Error', () => pm.response.to.have.jsonSchema(schemas.Error));",
+              "const body = pm.response.json();",
+              "pm.test(id+' | código VALIDATION_ERROR', () => pm.expect(body.error.code).to.equal('VALIDATION_ERROR'));",
+              "",
+              "",
+              "function get(path, token, fn) {",
+              "  pm.sendRequest({url: pm.environment.get('baseUrl') + path, method:'GET', header:{Authorization:'Bearer '+pm.environment.get(token)}}, (err,res) => {",
+              "    pm.test(id+' | lectura posterior disponible '+path, () => {pm.expect(err).to.equal(null); pm.expect(res.code).to.equal(200);});",
+              "    if (!err && res) fn(res.json());",
+              "  });",
+              "}",
+              "function checkSchema(value, name, label) {",
+              "  pm.test(id+' | esquema '+label, () => pm.expect(value).to.have.jsonSchema(schemas[name]));",
+              "}",
+              "function checkIds(value) {",
+              "  checkSchema(value, 'OrderPage', 'listado posterior');",
+              "  pm.test(id+' | sin creaciones adicionales', () => {",
+              "    pm.expect(value.total).to.equal(4);",
+              "    pm.expect(value.items.map(x=>x.id).sort()).to.eql(JSON.parse(pm.environment.get('expectedIds')).sort());",
+              "    value.items.forEach(x=>pm.expect(x.owner).to.equal('usuario_a'));",
+              "  });",
+              "}",
+              "get('/orders?limit=20','tokenA', checkIds);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC07 | Sin credenciales",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [],
+        "url": "{{baseUrl}}/orders/{{createdId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = 'TC07';",
+              "const schemas = JSON.parse(pm.collectionVariables.get('schemas'));",
+              "pm.test(id + ' | estado HTTP 401', () => pm.response.to.have.status(401));",
+              "pm.test(id + ' | Content-Type JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.match(/^application\\/json/));",
+              "pm.test(id + ' | esquema Error', () => pm.response.to.have.jsonSchema(schemas.Error));",
+              "const body = pm.response.json();",
+              "pm.test(id+' | código UNAUTHORIZED', () => pm.expect(body.error.code).to.equal('UNAUTHORIZED'));",
+              "pm.test(id+' | desafío Bearer', () => pm.expect(pm.response.headers.get('WWW-Authenticate')).to.equal('Bearer'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC08 | Credencial inválida",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer invalid-demo-session"
+          }
+        ],
+        "url": "{{baseUrl}}/orders/{{createdId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = 'TC08';",
+              "const schemas = JSON.parse(pm.collectionVariables.get('schemas'));",
+              "pm.test(id + ' | estado HTTP 401', () => pm.response.to.have.status(401));",
+              "pm.test(id + ' | Content-Type JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.match(/^application\\/json/));",
+              "pm.test(id + ' | esquema Error', () => pm.response.to.have.jsonSchema(schemas.Error));",
+              "const body = pm.response.json();",
+              "pm.test(id+' | código UNAUTHORIZED', () => pm.expect(body.error.code).to.equal('UNAUTHORIZED'));",
+              "pm.test(id+' | desafío Bearer', () => pm.expect(pm.response.headers.get('WWW-Authenticate')).to.equal('Bearer'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC09 | Acceso y modificación de pedido ajeno",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{tokenA}}"
+          }
+        ],
+        "url": "{{baseUrl}}/orders/{{foreignId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = 'TC09';",
+              "const schemas = JSON.parse(pm.collectionVariables.get('schemas'));",
+              "pm.test(id + ' | estado HTTP 403', () => pm.response.to.have.status(403));",
+              "pm.test(id + ' | Content-Type JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.match(/^application\\/json/));",
+              "pm.test(id + ' | esquema Error', () => pm.response.to.have.jsonSchema(schemas.Error));",
+              "const body = pm.response.json();",
+              "pm.test(id+' | código FORBIDDEN', () => pm.expect(body.error.code).to.equal('FORBIDDEN'));",
+              "",
+              "",
+              "function get(path, token, fn) {",
+              "  pm.sendRequest({url: pm.environment.get('baseUrl') + path, method:'GET', header:{Authorization:'Bearer '+pm.environment.get(token)}}, (err,res) => {",
+              "    pm.test(id+' | lectura posterior disponible '+path, () => {pm.expect(err).to.equal(null); pm.expect(res.code).to.equal(200);});",
+              "    if (!err && res) fn(res.json());",
+              "  });",
+              "}",
+              "function checkSchema(value, name, label) {",
+              "  pm.test(id+' | esquema '+label, () => pm.expect(value).to.have.jsonSchema(schemas[name]));",
+              "}",
+              "function checkIds(value) {",
+              "  checkSchema(value, 'OrderPage', 'listado posterior');",
+              "  pm.test(id+' | sin creaciones adicionales', () => {",
+              "    pm.expect(value.total).to.equal(4);",
+              "    pm.expect(value.items.map(x=>x.id).sort()).to.eql(JSON.parse(pm.environment.get('expectedIds')).sort());",
+              "    value.items.forEach(x=>pm.expect(x.owner).to.equal('usuario_a'));",
+              "  });",
+              "}",
+              "pm.sendRequest({url:pm.environment.get('baseUrl')+'/orders/'+pm.environment.get('foreignId')+'/confirmation',method:'PUT',header:{Authorization:'Bearer '+pm.environment.get('tokenA')}}, (err,res)=> {",
+              " pm.test(id+' | confirmación ajena prohibida',()=> {pm.expect(err).to.equal(null); pm.expect(res.code).to.equal(403); pm.expect(res.json().error.code).to.equal('FORBIDDEN');});",
+              " if (!err && res) checkSchema(res.json(),'Error','confirmación prohibida');",
+              " get('/orders/'+pm.environment.get('foreignId'),'tokenB', own => {",
+              "  checkSchema(own,'Order','lectura autorizada B');",
+              "  pm.test(id+' | pedido ajeno sin efecto',()=> {pm.expect(own.id).to.equal(pm.environment.get('foreignId')); pm.expect(own.owner).to.equal('usuario_b'); pm.expect(own.status).to.equal('draft'); pm.expect(own.confirmationCount).to.equal(0); pm.expect(own.confirmedAt).to.equal(null);});",
+              " });",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC10 | Recurso inexistente",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{tokenA}}"
+          }
+        ],
+        "url": "{{baseUrl}}/orders/00000000-0000-4000-8000-000000000000"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = 'TC10';",
+              "const schemas = JSON.parse(pm.collectionVariables.get('schemas'));",
+              "pm.test(id + ' | estado HTTP 404', () => pm.response.to.have.status(404));",
+              "pm.test(id + ' | Content-Type JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.match(/^application\\/json/));",
+              "pm.test(id + ' | esquema Error', () => pm.response.to.have.jsonSchema(schemas.Error));",
+              "const body = pm.response.json();",
+              "pm.test(id+' | código NOT_FOUND', () => pm.expect(body.error.code).to.equal('NOT_FOUND'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC11 | Confirmar borrador y verificar cambio",
+      "request": {
+        "method": "PUT",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{tokenA}}"
+          }
+        ],
+        "url": "{{baseUrl}}/orders/{{createdId}}/confirmation"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = 'TC11';",
+              "const schemas = JSON.parse(pm.collectionVariables.get('schemas'));",
+              "pm.test(id + ' | estado HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test(id + ' | Content-Type JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.match(/^application\\/json/));",
+              "pm.test(id + ' | esquema Order', () => pm.response.to.have.jsonSchema(schemas.Order));",
+              "const body = pm.response.json();",
+              "",
+              "function get(path, token, fn) {",
+              "  pm.sendRequest({url: pm.environment.get('baseUrl') + path, method:'GET', header:{Authorization:'Bearer '+pm.environment.get(token)}}, (err,res) => {",
+              "    pm.test(id+' | lectura posterior disponible '+path, () => {pm.expect(err).to.equal(null); pm.expect(res.code).to.equal(200);});",
+              "    if (!err && res) fn(res.json());",
+              "  });",
+              "}",
+              "function checkSchema(value, name, label) {",
+              "  pm.test(id+' | esquema '+label, () => pm.expect(value).to.have.jsonSchema(schemas[name]));",
+              "}",
+              "function checkIds(value) {",
+              "  checkSchema(value, 'OrderPage', 'listado posterior');",
+              "  pm.test(id+' | sin creaciones adicionales', () => {",
+              "    pm.expect(value.total).to.equal(4);",
+              "    pm.expect(value.items.map(x=>x.id).sort()).to.eql(JSON.parse(pm.environment.get('expectedIds')).sort());",
+              "    value.items.forEach(x=>pm.expect(x.owner).to.equal('usuario_a'));",
+              "  });",
+              "}",
+              "pm.environment.set('confirmedAt', body.confirmedAt);",
+              "pm.test(id+' | primera confirmación',()=> {pm.expect(body.id).to.equal(pm.environment.get('createdId')); pm.expect(body.status).to.equal('confirmed'); pm.expect(body.confirmationCount).to.equal(1); pm.expect(body.total).to.equal(50); pm.expect(body.confirmedAt).to.be.a('string'); pm.expect(Number.isNaN(Date.parse(body.confirmedAt))).to.equal(false);});",
+              "get('/orders/'+pm.environment.get('createdId'),'tokenA', saved => {checkSchema(saved,'Order','confirmación persistida'); pm.test(id+' | efecto persistido',()=>pm.expect(saved).to.eql(body));});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC12 | Repetir confirmación: efecto final idempotente",
+      "request": {
+        "method": "PUT",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{tokenA}}"
+          }
+        ],
+        "url": "{{baseUrl}}/orders/{{createdId}}/confirmation"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = 'TC12';",
+              "const schemas = JSON.parse(pm.collectionVariables.get('schemas'));",
+              "pm.test(id + ' | estado HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test(id + ' | Content-Type JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.match(/^application\\/json/));",
+              "pm.test(id + ' | esquema Order', () => pm.response.to.have.jsonSchema(schemas.Order));",
+              "const body = pm.response.json();",
+              "",
+              "function get(path, token, fn) {",
+              "  pm.sendRequest({url: pm.environment.get('baseUrl') + path, method:'GET', header:{Authorization:'Bearer '+pm.environment.get(token)}}, (err,res) => {",
+              "    pm.test(id+' | lectura posterior disponible '+path, () => {pm.expect(err).to.equal(null); pm.expect(res.code).to.equal(200);});",
+              "    if (!err && res) fn(res.json());",
+              "  });",
+              "}",
+              "function checkSchema(value, name, label) {",
+              "  pm.test(id+' | esquema '+label, () => pm.expect(value).to.have.jsonSchema(schemas[name]));",
+              "}",
+              "function checkIds(value) {",
+              "  checkSchema(value, 'OrderPage', 'listado posterior');",
+              "  pm.test(id+' | sin creaciones adicionales', () => {",
+              "    pm.expect(value.total).to.equal(4);",
+              "    pm.expect(value.items.map(x=>x.id).sort()).to.eql(JSON.parse(pm.environment.get('expectedIds')).sort());",
+              "    value.items.forEach(x=>pm.expect(x.owner).to.equal('usuario_a'));",
+              "  });",
+              "}",
+              "function effect(saved, label) {checkSchema(saved,'Order',label); pm.test(id+' | '+label+' mantiene efecto único',()=> {pm.expect(saved.id).to.equal(pm.environment.get('createdId')); pm.expect(saved.owner).to.equal('usuario_a'); pm.expect(saved.product).to.equal('CUADERNO'); pm.expect(saved.quantity).to.equal(2); pm.expect(saved.status).to.equal('confirmed'); pm.expect(saved.confirmationCount).to.equal(1); pm.expect(saved.confirmedAt).to.equal(pm.environment.get('confirmedAt')); pm.expect(saved.total).to.equal(50);});}",
+              "effect(body,'PUT repetido');",
+              "get('/orders/'+pm.environment.get('createdId'),'tokenA', saved=> {effect(saved,'lectura final'); get('/orders?limit=20','tokenA',checkIds);});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CLEANUP | eliminar pedido de la corrida y comprobar",
+      "request": {
+        "method": "DELETE",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{tokenA}}"
+          }
+        ],
+        "url": "{{baseUrl}}/orders/{{createdId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = 'CLEANUP';",
+              "const schemas = JSON.parse(pm.collectionVariables.get('schemas'));",
+              "pm.test(id + ' | estado HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test(id + ' | Content-Type JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.match(/^application\\/json/));",
+              "pm.test(id + ' | esquema Deleted', () => pm.response.to.have.jsonSchema(schemas.Deleted));",
+              "const body = pm.response.json();",
+              "",
+              "function get(path, token, fn) {",
+              "  pm.sendRequest({url: pm.environment.get('baseUrl') + path, method:'GET', header:{Authorization:'Bearer '+pm.environment.get(token)}}, (err,res) => {",
+              "    pm.test(id+' | lectura posterior disponible '+path, () => {pm.expect(err).to.equal(null); pm.expect(res.code).to.equal(200);});",
+              "    if (!err && res) fn(res.json());",
+              "  });",
+              "}",
+              "function checkSchema(value, name, label) {",
+              "  pm.test(id+' | esquema '+label, () => pm.expect(value).to.have.jsonSchema(schemas[name]));",
+              "}",
+              "function checkIds(value) {",
+              "  checkSchema(value, 'OrderPage', 'listado posterior');",
+              "  pm.test(id+' | sin creaciones adicionales', () => {",
+              "    pm.expect(value.total).to.equal(4);",
+              "    pm.expect(value.items.map(x=>x.id).sort()).to.eql(JSON.parse(pm.environment.get('expectedIds')).sort());",
+              "    value.items.forEach(x=>pm.expect(x.owner).to.equal('usuario_a'));",
+              "  });",
+              "}",
+              "pm.test(id+' | eliminado ID actual',()=>pm.expect(body.id).to.equal(pm.environment.get('createdId')));",
+              "pm.sendRequest({url:pm.environment.get('baseUrl')+'/orders/'+pm.environment.get('createdId'),method:'GET',header:{Authorization:'Bearer '+pm.environment.get('tokenA')}},(err,res)=> {",
+              " pm.test(id+' | lectura final 404',()=> {pm.expect(err).to.equal(null);pm.expect(res.code).to.equal(404);pm.expect(res.json().error.code).to.equal('NOT_FOUND');});",
+              " if (!err && res) checkSchema(res.json(),'Error','recurso eliminado');",
+              " get('/orders?limit=20','tokenA', page=> {",
+              "  checkSchema(page,'OrderPage','limpieza');",
+              "  pm.test(id+' | vuelve al estado inicial',()=> {pm.expect(page.total).to.equal(3);pm.expect(page.items.map(x=>x.id).sort()).to.eql(JSON.parse(pm.environment.get('ownIds')).sort());});",
+              "  ['tokenA','tokenB','createdId','foreignId','ownIds','expectedIds','confirmedAt'].forEach(k=>pm.environment.unset(k));",
+              " });",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

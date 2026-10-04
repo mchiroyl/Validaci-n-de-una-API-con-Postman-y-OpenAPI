@@ -1,0 +1,1590 @@
+{
+  "label": "01-base",
+  "executedAt": "2026-10-04T05:48:46.499Z",
+  "timezone": "America/Guatemala",
+  "node": "v24.19.0",
+  "dependencies": {
+    "@apidevtools/swagger-parser": "13.1.0",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "newman": "6.2.2"
+  },
+  "collectionFormat": "2.1.0",
+  "openapi": "3.1.0",
+  "contractSha256": "0fcf960f95ed385d12abfb96d0cbce7d3e2585d6c9362c1a82b9be3b56ade382",
+  "apiSourceSha256": "d2c1c9b0ee79579bb14861b037b06794cfa529d8c42b76e9c4985761f9b5b8d1",
+  "documentValidation": "SwaggerParser.validate: PASS (estructura del documento)",
+  "responseValidation": "Ajv 2020: cuerpo por operación y estado documentados; no validación integral OpenAPI",
+  "casesExecuted": 12,
+  "casesPassed": 12,
+  "casesFailed": 0,
+  "exactIds": true,
+  "primaryRequests": 14,
+  "responseSamples": 24,
+  "assertions": 91,
+  "assertionFailures": 0,
+  "responseSchemaFailures": 0,
+  "exitCode": 0,
+  "cases": [
+    {
+      "id": "TC01",
+      "name": "TC01 | Paginación válida y aislamiento",
+      "status": 200,
+      "passed": true,
+      "assertions": [
+        {
+          "name": "TC01 | estado HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "TC01 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC01 | esquema OrderPage",
+          "passed": true
+        },
+        {
+          "name": "TC01 | primera página y propietario",
+          "passed": true
+        },
+        {
+          "name": "TC01 | lectura posterior disponible /orders?page=2&limit=2",
+          "passed": true
+        },
+        {
+          "name": "TC01 | esquema segunda página",
+          "passed": true
+        },
+        {
+          "name": "TC01 | segunda página completa sin duplicados",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "TC02",
+      "name": "TC02 | Página inválida",
+      "status": 400,
+      "passed": true,
+      "assertions": [
+        {
+          "name": "TC02 | estado HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "TC02 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC02 | esquema Error",
+          "passed": true
+        },
+        {
+          "name": "TC02 | código VALIDATION_ERROR",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "TC03",
+      "name": "TC03 | Crear pedido válido",
+      "status": 201,
+      "passed": true,
+      "assertions": [
+        {
+          "name": "TC03 | estado HTTP 201",
+          "passed": true
+        },
+        {
+          "name": "TC03 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC03 | esquema Order",
+          "passed": true
+        },
+        {
+          "name": "TC03 | valores iniciales e importe calculado",
+          "passed": true
+        },
+        {
+          "name": "TC03 | Location del recurso",
+          "passed": true
+        },
+        {
+          "name": "TC03 | lectura posterior disponible /orders?limit=20",
+          "passed": true
+        },
+        {
+          "name": "TC03 | esquema listado posterior",
+          "passed": true
+        },
+        {
+          "name": "TC03 | sin creaciones adicionales",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "TC04",
+      "name": "TC04 | Consultar creación persistida",
+      "status": 200,
+      "passed": true,
+      "assertions": [
+        {
+          "name": "TC04 | estado HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "TC04 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC04 | esquema Order",
+          "passed": true
+        },
+        {
+          "name": "TC04 | creación persistida correcta",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "TC05",
+      "name": "TC05 | Cantidad inválida sin efecto",
+      "status": 400,
+      "passed": true,
+      "assertions": [
+        {
+          "name": "TC05 | estado HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "TC05 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC05 | esquema Error",
+          "passed": true
+        },
+        {
+          "name": "TC05 | código VALIDATION_ERROR",
+          "passed": true
+        },
+        {
+          "name": "TC05 | lectura posterior disponible /orders?limit=20",
+          "passed": true
+        },
+        {
+          "name": "TC05 | esquema listado posterior",
+          "passed": true
+        },
+        {
+          "name": "TC05 | sin creaciones adicionales",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "TC06",
+      "name": "TC06 | Campo obligatorio ausente",
+      "status": 400,
+      "passed": true,
+      "assertions": [
+        {
+          "name": "TC06 | estado HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "TC06 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC06 | esquema Error",
+          "passed": true
+        },
+        {
+          "name": "TC06 | código VALIDATION_ERROR",
+          "passed": true
+        },
+        {
+          "name": "TC06 | lectura posterior disponible /orders?limit=20",
+          "passed": true
+        },
+        {
+          "name": "TC06 | esquema listado posterior",
+          "passed": true
+        },
+        {
+          "name": "TC06 | sin creaciones adicionales",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "TC07",
+      "name": "TC07 | Sin credenciales",
+      "status": 401,
+      "passed": true,
+      "assertions": [
+        {
+          "name": "TC07 | estado HTTP 401",
+          "passed": true
+        },
+        {
+          "name": "TC07 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC07 | esquema Error",
+          "passed": true
+        },
+        {
+          "name": "TC07 | código UNAUTHORIZED",
+          "passed": true
+        },
+        {
+          "name": "TC07 | desafío Bearer",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "TC08",
+      "name": "TC08 | Credencial inválida",
+      "status": 401,
+      "passed": true,
+      "assertions": [
+        {
+          "name": "TC08 | estado HTTP 401",
+          "passed": true
+        },
+        {
+          "name": "TC08 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC08 | esquema Error",
+          "passed": true
+        },
+        {
+          "name": "TC08 | código UNAUTHORIZED",
+          "passed": true
+        },
+        {
+          "name": "TC08 | desafío Bearer",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "TC09",
+      "name": "TC09 | Acceso y modificación de pedido ajeno",
+      "status": 403,
+      "passed": true,
+      "assertions": [
+        {
+          "name": "TC09 | estado HTTP 403",
+          "passed": true
+        },
+        {
+          "name": "TC09 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC09 | esquema Error",
+          "passed": true
+        },
+        {
+          "name": "TC09 | código FORBIDDEN",
+          "passed": true
+        },
+        {
+          "name": "TC09 | confirmación ajena prohibida",
+          "passed": true
+        },
+        {
+          "name": "TC09 | esquema confirmación prohibida",
+          "passed": true
+        },
+        {
+          "name": "TC09 | lectura posterior disponible /orders/91eaa323-55e5-4923-9bf0-130da8ec4e7e",
+          "passed": true
+        },
+        {
+          "name": "TC09 | esquema lectura autorizada B",
+          "passed": true
+        },
+        {
+          "name": "TC09 | pedido ajeno sin efecto",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "TC10",
+      "name": "TC10 | Recurso inexistente",
+      "status": 404,
+      "passed": true,
+      "assertions": [
+        {
+          "name": "TC10 | estado HTTP 404",
+          "passed": true
+        },
+        {
+          "name": "TC10 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC10 | esquema Error",
+          "passed": true
+        },
+        {
+          "name": "TC10 | código NOT_FOUND",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "TC11",
+      "name": "TC11 | Confirmar borrador y verificar cambio",
+      "status": 200,
+      "passed": true,
+      "assertions": [
+        {
+          "name": "TC11 | estado HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "TC11 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC11 | esquema Order",
+          "passed": true
+        },
+        {
+          "name": "TC11 | primera confirmación",
+          "passed": true
+        },
+        {
+          "name": "TC11 | lectura posterior disponible /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+          "passed": true
+        },
+        {
+          "name": "TC11 | esquema confirmación persistida",
+          "passed": true
+        },
+        {
+          "name": "TC11 | efecto persistido",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "TC12",
+      "name": "TC12 | Repetir confirmación: efecto final idempotente",
+      "status": 200,
+      "passed": true,
+      "assertions": [
+        {
+          "name": "TC12 | estado HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "TC12 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC12 | esquema Order",
+          "passed": true
+        },
+        {
+          "name": "TC12 | esquema PUT repetido",
+          "passed": true
+        },
+        {
+          "name": "TC12 | PUT repetido mantiene efecto único",
+          "passed": true
+        },
+        {
+          "name": "TC12 | lectura posterior disponible /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+          "passed": true
+        },
+        {
+          "name": "TC12 | esquema lectura final",
+          "passed": true
+        },
+        {
+          "name": "TC12 | lectura final mantiene efecto único",
+          "passed": true
+        },
+        {
+          "name": "TC12 | lectura posterior disponible /orders?limit=20",
+          "passed": true
+        },
+        {
+          "name": "TC12 | esquema listado posterior",
+          "passed": true
+        },
+        {
+          "name": "TC12 | sin creaciones adicionales",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "executions": [
+    {
+      "name": "SETUP | datos limpios y sesiones efímeras",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "SETUP | estado HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "SETUP | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "SETUP | esquema Fixture",
+          "passed": true
+        },
+        {
+          "name": "SETUP | 3 propios y 1 ajeno",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC01 | Paginación válida y aislamiento",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "TC01 | estado HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "TC01 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC01 | esquema OrderPage",
+          "passed": true
+        },
+        {
+          "name": "TC01 | primera página y propietario",
+          "passed": true
+        },
+        {
+          "name": "TC01 | lectura posterior disponible /orders?page=2&limit=2",
+          "passed": true
+        },
+        {
+          "name": "TC01 | esquema segunda página",
+          "passed": true
+        },
+        {
+          "name": "TC01 | segunda página completa sin duplicados",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC02 | Página inválida",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "TC02 | estado HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "TC02 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC02 | esquema Error",
+          "passed": true
+        },
+        {
+          "name": "TC02 | código VALIDATION_ERROR",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC03 | Crear pedido válido",
+      "status": 201,
+      "assertions": [
+        {
+          "name": "TC03 | estado HTTP 201",
+          "passed": true
+        },
+        {
+          "name": "TC03 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC03 | esquema Order",
+          "passed": true
+        },
+        {
+          "name": "TC03 | valores iniciales e importe calculado",
+          "passed": true
+        },
+        {
+          "name": "TC03 | Location del recurso",
+          "passed": true
+        },
+        {
+          "name": "TC03 | lectura posterior disponible /orders?limit=20",
+          "passed": true
+        },
+        {
+          "name": "TC03 | esquema listado posterior",
+          "passed": true
+        },
+        {
+          "name": "TC03 | sin creaciones adicionales",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC04 | Consultar creación persistida",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "TC04 | estado HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "TC04 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC04 | esquema Order",
+          "passed": true
+        },
+        {
+          "name": "TC04 | creación persistida correcta",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC05 | Cantidad inválida sin efecto",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "TC05 | estado HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "TC05 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC05 | esquema Error",
+          "passed": true
+        },
+        {
+          "name": "TC05 | código VALIDATION_ERROR",
+          "passed": true
+        },
+        {
+          "name": "TC05 | lectura posterior disponible /orders?limit=20",
+          "passed": true
+        },
+        {
+          "name": "TC05 | esquema listado posterior",
+          "passed": true
+        },
+        {
+          "name": "TC05 | sin creaciones adicionales",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC06 | Campo obligatorio ausente",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "TC06 | estado HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "TC06 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC06 | esquema Error",
+          "passed": true
+        },
+        {
+          "name": "TC06 | código VALIDATION_ERROR",
+          "passed": true
+        },
+        {
+          "name": "TC06 | lectura posterior disponible /orders?limit=20",
+          "passed": true
+        },
+        {
+          "name": "TC06 | esquema listado posterior",
+          "passed": true
+        },
+        {
+          "name": "TC06 | sin creaciones adicionales",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC07 | Sin credenciales",
+      "status": 401,
+      "assertions": [
+        {
+          "name": "TC07 | estado HTTP 401",
+          "passed": true
+        },
+        {
+          "name": "TC07 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC07 | esquema Error",
+          "passed": true
+        },
+        {
+          "name": "TC07 | código UNAUTHORIZED",
+          "passed": true
+        },
+        {
+          "name": "TC07 | desafío Bearer",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC08 | Credencial inválida",
+      "status": 401,
+      "assertions": [
+        {
+          "name": "TC08 | estado HTTP 401",
+          "passed": true
+        },
+        {
+          "name": "TC08 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC08 | esquema Error",
+          "passed": true
+        },
+        {
+          "name": "TC08 | código UNAUTHORIZED",
+          "passed": true
+        },
+        {
+          "name": "TC08 | desafío Bearer",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC09 | Acceso y modificación de pedido ajeno",
+      "status": 403,
+      "assertions": [
+        {
+          "name": "TC09 | estado HTTP 403",
+          "passed": true
+        },
+        {
+          "name": "TC09 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC09 | esquema Error",
+          "passed": true
+        },
+        {
+          "name": "TC09 | código FORBIDDEN",
+          "passed": true
+        },
+        {
+          "name": "TC09 | confirmación ajena prohibida",
+          "passed": true
+        },
+        {
+          "name": "TC09 | esquema confirmación prohibida",
+          "passed": true
+        },
+        {
+          "name": "TC09 | lectura posterior disponible /orders/91eaa323-55e5-4923-9bf0-130da8ec4e7e",
+          "passed": true
+        },
+        {
+          "name": "TC09 | esquema lectura autorizada B",
+          "passed": true
+        },
+        {
+          "name": "TC09 | pedido ajeno sin efecto",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC10 | Recurso inexistente",
+      "status": 404,
+      "assertions": [
+        {
+          "name": "TC10 | estado HTTP 404",
+          "passed": true
+        },
+        {
+          "name": "TC10 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC10 | esquema Error",
+          "passed": true
+        },
+        {
+          "name": "TC10 | código NOT_FOUND",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC11 | Confirmar borrador y verificar cambio",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "TC11 | estado HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "TC11 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC11 | esquema Order",
+          "passed": true
+        },
+        {
+          "name": "TC11 | primera confirmación",
+          "passed": true
+        },
+        {
+          "name": "TC11 | lectura posterior disponible /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+          "passed": true
+        },
+        {
+          "name": "TC11 | esquema confirmación persistida",
+          "passed": true
+        },
+        {
+          "name": "TC11 | efecto persistido",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC12 | Repetir confirmación: efecto final idempotente",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "TC12 | estado HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "TC12 | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "TC12 | esquema Order",
+          "passed": true
+        },
+        {
+          "name": "TC12 | esquema PUT repetido",
+          "passed": true
+        },
+        {
+          "name": "TC12 | PUT repetido mantiene efecto único",
+          "passed": true
+        },
+        {
+          "name": "TC12 | lectura posterior disponible /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+          "passed": true
+        },
+        {
+          "name": "TC12 | esquema lectura final",
+          "passed": true
+        },
+        {
+          "name": "TC12 | lectura final mantiene efecto único",
+          "passed": true
+        },
+        {
+          "name": "TC12 | lectura posterior disponible /orders?limit=20",
+          "passed": true
+        },
+        {
+          "name": "TC12 | esquema listado posterior",
+          "passed": true
+        },
+        {
+          "name": "TC12 | sin creaciones adicionales",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "CLEANUP | eliminar pedido de la corrida y comprobar",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "CLEANUP | estado HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "CLEANUP | Content-Type JSON",
+          "passed": true
+        },
+        {
+          "name": "CLEANUP | esquema Deleted",
+          "passed": true
+        },
+        {
+          "name": "CLEANUP | eliminado ID actual",
+          "passed": true
+        },
+        {
+          "name": "CLEANUP | lectura final 404",
+          "passed": true
+        },
+        {
+          "name": "CLEANUP | esquema recurso eliminado",
+          "passed": true
+        },
+        {
+          "name": "CLEANUP | lectura posterior disponible /orders?limit=20",
+          "passed": true
+        },
+        {
+          "name": "CLEANUP | esquema limpieza",
+          "passed": true
+        },
+        {
+          "name": "CLEANUP | vuelve al estado inicial",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "schemaValidation": [
+    {
+      "operation": "GET /orders",
+      "status": 200,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders",
+      "status": 200,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders",
+      "status": 400,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "POST /orders",
+      "status": 201,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders",
+      "status": 200,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+      "status": 200,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "POST /orders",
+      "status": 400,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders",
+      "status": 200,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "POST /orders",
+      "status": 400,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders",
+      "status": 200,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+      "status": 401,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+      "status": 401,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders/91eaa323-55e5-4923-9bf0-130da8ec4e7e",
+      "status": 403,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "PUT /orders/91eaa323-55e5-4923-9bf0-130da8ec4e7e/confirmation",
+      "status": 403,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders/91eaa323-55e5-4923-9bf0-130da8ec4e7e",
+      "status": 200,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders/00000000-0000-4000-8000-000000000000",
+      "status": 404,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "PUT /orders/fdba3048-2cee-4124-b916-40b36794c7f6/confirmation",
+      "status": 200,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+      "status": 200,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "PUT /orders/fdba3048-2cee-4124-b916-40b36794c7f6/confirmation",
+      "status": 200,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+      "status": 200,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders",
+      "status": 200,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "DELETE /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+      "status": 200,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+      "status": 404,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "operation": "GET /orders",
+      "status": 200,
+      "valid": true,
+      "errors": []
+    }
+  ],
+  "responseSamplesSanitized": [
+    {
+      "operation": "GET /orders",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "items": [
+          {
+            "id": "0d54d227-aa63-4f48-bc3a-d9ccb4c5ead0",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 1,
+            "total": 25,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "4bd5d4a8-c4c6-45ce-813b-aa232f4fc845",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 2,
+            "total": 50,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          }
+        ],
+        "page": 1,
+        "limit": 2,
+        "total": 3,
+        "totalPages": 2
+      }
+    },
+    {
+      "operation": "GET /orders",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "items": [
+          {
+            "id": "12192386-f2dc-4cb7-8741-8621eff007cc",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 3,
+            "total": 75,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          }
+        ],
+        "page": 2,
+        "limit": 2,
+        "total": 3,
+        "totalPages": 2
+      }
+    },
+    {
+      "operation": "GET /orders",
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "error": {
+          "code": "VALIDATION_ERROR",
+          "message": "page debe ser 1..1000000; limit 1..20"
+        }
+      }
+    },
+    {
+      "operation": "POST /orders",
+      "status": 201,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "id": "fdba3048-2cee-4124-b916-40b36794c7f6",
+        "owner": "usuario_a",
+        "product": "CUADERNO",
+        "quantity": 2,
+        "total": 50,
+        "status": "draft",
+        "confirmationCount": 0,
+        "createdAt": "2026-10-04T05:48:45.094Z",
+        "confirmedAt": null
+      }
+    },
+    {
+      "operation": "GET /orders",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "items": [
+          {
+            "id": "0d54d227-aa63-4f48-bc3a-d9ccb4c5ead0",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 1,
+            "total": 25,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "4bd5d4a8-c4c6-45ce-813b-aa232f4fc845",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 2,
+            "total": 50,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "12192386-f2dc-4cb7-8741-8621eff007cc",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 3,
+            "total": 75,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "fdba3048-2cee-4124-b916-40b36794c7f6",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 2,
+            "total": 50,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:45.094Z",
+            "confirmedAt": null
+          }
+        ],
+        "page": 1,
+        "limit": 20,
+        "total": 4,
+        "totalPages": 1
+      }
+    },
+    {
+      "operation": "GET /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "id": "fdba3048-2cee-4124-b916-40b36794c7f6",
+        "owner": "usuario_a",
+        "product": "CUADERNO",
+        "quantity": 2,
+        "total": 50,
+        "status": "draft",
+        "confirmationCount": 0,
+        "createdAt": "2026-10-04T05:48:45.094Z",
+        "confirmedAt": null
+      }
+    },
+    {
+      "operation": "POST /orders",
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "error": {
+          "code": "VALIDATION_ERROR",
+          "message": "product=CUADERNO y quantity entera de 1 a 10 son obligatorios; no se admiten campos adicionales"
+        }
+      }
+    },
+    {
+      "operation": "GET /orders",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "items": [
+          {
+            "id": "0d54d227-aa63-4f48-bc3a-d9ccb4c5ead0",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 1,
+            "total": 25,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "4bd5d4a8-c4c6-45ce-813b-aa232f4fc845",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 2,
+            "total": 50,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "12192386-f2dc-4cb7-8741-8621eff007cc",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 3,
+            "total": 75,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "fdba3048-2cee-4124-b916-40b36794c7f6",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 2,
+            "total": 50,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:45.094Z",
+            "confirmedAt": null
+          }
+        ],
+        "page": 1,
+        "limit": 20,
+        "total": 4,
+        "totalPages": 1
+      }
+    },
+    {
+      "operation": "POST /orders",
+      "status": 400,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "error": {
+          "code": "VALIDATION_ERROR",
+          "message": "product=CUADERNO y quantity entera de 1 a 10 son obligatorios; no se admiten campos adicionales"
+        }
+      }
+    },
+    {
+      "operation": "GET /orders",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "items": [
+          {
+            "id": "0d54d227-aa63-4f48-bc3a-d9ccb4c5ead0",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 1,
+            "total": 25,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "4bd5d4a8-c4c6-45ce-813b-aa232f4fc845",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 2,
+            "total": 50,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "12192386-f2dc-4cb7-8741-8621eff007cc",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 3,
+            "total": 75,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "fdba3048-2cee-4124-b916-40b36794c7f6",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 2,
+            "total": 50,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:45.094Z",
+            "confirmedAt": null
+          }
+        ],
+        "page": 1,
+        "limit": 20,
+        "total": 4,
+        "totalPages": 1
+      }
+    },
+    {
+      "operation": "GET /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+      "status": 401,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "error": {
+          "code": "UNAUTHORIZED",
+          "message": "Credenciales ausentes o inválidas"
+        }
+      }
+    },
+    {
+      "operation": "GET /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+      "status": 401,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "error": {
+          "code": "UNAUTHORIZED",
+          "message": "Credenciales ausentes o inválidas"
+        }
+      }
+    },
+    {
+      "operation": "GET /orders/91eaa323-55e5-4923-9bf0-130da8ec4e7e",
+      "status": 403,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "error": {
+          "code": "FORBIDDEN",
+          "message": "Pedido de otro usuario"
+        }
+      }
+    },
+    {
+      "operation": "PUT /orders/91eaa323-55e5-4923-9bf0-130da8ec4e7e/confirmation",
+      "status": 403,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "error": {
+          "code": "FORBIDDEN",
+          "message": "Pedido de otro usuario"
+        }
+      }
+    },
+    {
+      "operation": "GET /orders/91eaa323-55e5-4923-9bf0-130da8ec4e7e",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "id": "91eaa323-55e5-4923-9bf0-130da8ec4e7e",
+        "owner": "usuario_b",
+        "product": "CUADERNO",
+        "quantity": 1,
+        "total": 25,
+        "status": "draft",
+        "confirmationCount": 0,
+        "createdAt": "2026-10-04T05:48:44.693Z",
+        "confirmedAt": null
+      }
+    },
+    {
+      "operation": "GET /orders/00000000-0000-4000-8000-000000000000",
+      "status": 404,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "error": {
+          "code": "NOT_FOUND",
+          "message": "Pedido inexistente"
+        }
+      }
+    },
+    {
+      "operation": "PUT /orders/fdba3048-2cee-4124-b916-40b36794c7f6/confirmation",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "id": "fdba3048-2cee-4124-b916-40b36794c7f6",
+        "owner": "usuario_a",
+        "product": "CUADERNO",
+        "quantity": 2,
+        "total": 50,
+        "status": "confirmed",
+        "confirmationCount": 1,
+        "createdAt": "2026-10-04T05:48:45.094Z",
+        "confirmedAt": "2026-10-04T05:48:45.980Z"
+      }
+    },
+    {
+      "operation": "GET /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "id": "fdba3048-2cee-4124-b916-40b36794c7f6",
+        "owner": "usuario_a",
+        "product": "CUADERNO",
+        "quantity": 2,
+        "total": 50,
+        "status": "confirmed",
+        "confirmationCount": 1,
+        "createdAt": "2026-10-04T05:48:45.094Z",
+        "confirmedAt": "2026-10-04T05:48:45.980Z"
+      }
+    },
+    {
+      "operation": "PUT /orders/fdba3048-2cee-4124-b916-40b36794c7f6/confirmation",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "id": "fdba3048-2cee-4124-b916-40b36794c7f6",
+        "owner": "usuario_a",
+        "product": "CUADERNO",
+        "quantity": 2,
+        "total": 50,
+        "status": "confirmed",
+        "confirmationCount": 1,
+        "createdAt": "2026-10-04T05:48:45.094Z",
+        "confirmedAt": "2026-10-04T05:48:45.980Z"
+      }
+    },
+    {
+      "operation": "GET /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "id": "fdba3048-2cee-4124-b916-40b36794c7f6",
+        "owner": "usuario_a",
+        "product": "CUADERNO",
+        "quantity": 2,
+        "total": 50,
+        "status": "confirmed",
+        "confirmationCount": 1,
+        "createdAt": "2026-10-04T05:48:45.094Z",
+        "confirmedAt": "2026-10-04T05:48:45.980Z"
+      }
+    },
+    {
+      "operation": "GET /orders",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "items": [
+          {
+            "id": "0d54d227-aa63-4f48-bc3a-d9ccb4c5ead0",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 1,
+            "total": 25,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "4bd5d4a8-c4c6-45ce-813b-aa232f4fc845",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 2,
+            "total": 50,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "12192386-f2dc-4cb7-8741-8621eff007cc",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 3,
+            "total": 75,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "fdba3048-2cee-4124-b916-40b36794c7f6",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 2,
+            "total": 50,
+            "status": "confirmed",
+            "confirmationCount": 1,
+            "createdAt": "2026-10-04T05:48:45.094Z",
+            "confirmedAt": "2026-10-04T05:48:45.980Z"
+          }
+        ],
+        "page": 1,
+        "limit": 20,
+        "total": 4,
+        "totalPages": 1
+      }
+    },
+    {
+      "operation": "DELETE /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "deleted": true,
+        "id": "fdba3048-2cee-4124-b916-40b36794c7f6"
+      }
+    },
+    {
+      "operation": "GET /orders/fdba3048-2cee-4124-b916-40b36794c7f6",
+      "status": 404,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "error": {
+          "code": "NOT_FOUND",
+          "message": "Pedido inexistente"
+        }
+      }
+    },
+    {
+      "operation": "GET /orders",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "items": [
+          {
+            "id": "0d54d227-aa63-4f48-bc3a-d9ccb4c5ead0",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 1,
+            "total": 25,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "4bd5d4a8-c4c6-45ce-813b-aa232f4fc845",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 2,
+            "total": 50,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          },
+          {
+            "id": "12192386-f2dc-4cb7-8741-8621eff007cc",
+            "owner": "usuario_a",
+            "product": "CUADERNO",
+            "quantity": 3,
+            "total": 75,
+            "status": "draft",
+            "confirmationCount": 0,
+            "createdAt": "2026-10-04T05:48:44.693Z",
+            "confirmedAt": null
+          }
+        ],
+        "page": 1,
+        "limit": 20,
+        "total": 3,
+        "totalPages": 1
+      }
+    }
+  ]
+}
