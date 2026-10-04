@@ -129,7 +129,7 @@ La última auditoría registrada de las herramientas de desarrollo contiene **7 
 
 Postman verifica estados, estructura, reglas y efectos. Swagger Parser valida el documento OpenAPI y Ajv 2020 valida los cuerpos observados según operación y estado. Esto no constituye validación integral de todo el tráfico OpenAPI. No se cubren carga, autenticación productiva ni todos los casos límite.
 
-GitHub Actions todavía no tiene una ejecución verificada de este proyecto. El workflow preparado bloquea avisos de auditoría moderados o superiores; no se presenta como aprobado.
+La primera ejecución de GitHub Actions aprobó la verificación funcional y falló en la auditoría por los avisos de Newman. El workflow muestra ahora trabajos separados para API y contrato y para seguridad de dependencias. La auditoría sigue bloqueando avisos moderados o superiores; un trabajo funcional aprobado no equivale a seguridad aprobada.
 
 ## Uso de inteligencia artificial
 
