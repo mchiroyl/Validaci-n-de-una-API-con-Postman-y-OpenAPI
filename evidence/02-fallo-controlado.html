@@ -1,5 +1,5 @@
 <!doctype html><html lang="es"><meta charset="utf-8"><title>Evidencia 02-fallo-controlado</title><style>body{font:16px system-ui;margin:32px;background:#f4f6fa;color:#172437}h1{font-size:25px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:24px;border:1px solid #d5dce6;border-radius:12px;line-height:1.5}</style><h1>Ejecución real: 02-fallo-controlado</h1><pre>VALIDACIÓN API PEDIDOS - 02-fallo-controlado
-Fecha UTC: 2026-10-04T05:48:48.880Z
+Fecha UTC: 2026-10-04T06:04:11.051Z
 Node v24.19.0 | Newman 6.2.2 | Colección 2.1.0 | OpenAPI 3.1.0
 Casos ejecutados: 12/12 | aprobados: 8 | fallidos: 4
 Solicitudes principales: 14 (12 casos + SETUP + CLEANUP)
@@ -77,7 +77,7 @@ TC09 | Acceso y modificación de pedido ajeno | HTTP 403
   PASS TC09 | código FORBIDDEN
   PASS TC09 | confirmación ajena prohibida
   PASS TC09 | esquema confirmación prohibida
-  PASS TC09 | lectura posterior disponible /orders/eb0883e3-5ec3-4572-a668-e6d8ea86f6c1
+  PASS TC09 | lectura posterior disponible /orders/1770ce83-ba02-41a0-a5ec-7ddb14ac0e49
   FAIL TC09 | esquema lectura autorizada B -&gt; expected data to satisfy schema but found following errors:
 data.total should be number
   PASS TC09 | pedido ajeno sin efecto
@@ -91,7 +91,7 @@ TC11 | Confirmar borrador y verificar cambio | HTTP 200
   PASS TC11 | Content-Type JSON
   PASS TC11 | esquema Order
   PASS TC11 | primera confirmación
-  PASS TC11 | lectura posterior disponible /orders/da36041c-4010-4e73-95be-ecec7ce575b0
+  PASS TC11 | lectura posterior disponible /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4
   FAIL TC11 | esquema confirmación persistida -&gt; expected data to satisfy schema but found following errors:
 data.total should be number
   FAIL TC11 | efecto persistido -&gt; expected { …(9) } to deeply equal { …(9) }
@@ -101,7 +101,7 @@ TC12 | Repetir confirmación: efecto final idempotente | HTTP 200
   PASS TC12 | esquema Order
   PASS TC12 | esquema PUT repetido
   PASS TC12 | PUT repetido mantiene efecto único
-  PASS TC12 | lectura posterior disponible /orders/da36041c-4010-4e73-95be-ecec7ce575b0
+  PASS TC12 | lectura posterior disponible /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4
   FAIL TC12 | esquema lectura final -&gt; expected data to satisfy schema but found following errors:
 data.total should be number
   FAIL TC12 | lectura final mantiene efecto único -&gt; expected &#39;50&#39; to equal 50
@@ -119,9 +119,9 @@ CLEANUP | eliminar pedido de la corrida y comprobar | HTTP 200
   PASS CLEANUP | esquema limpieza
   PASS CLEANUP | vuelve al estado inicial
 
-AJV FAIL GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0 HTTP 200: [{&quot;instancePath&quot;:&quot;/total&quot;,&quot;schemaPath&quot;:&quot;#/properties/total/type&quot;,&quot;keyword&quot;:&quot;type&quot;,&quot;params&quot;:{&quot;type&quot;:&quot;number&quot;},&quot;message&quot;:&quot;must be number&quot;}]
-AJV FAIL GET /orders/eb0883e3-5ec3-4572-a668-e6d8ea86f6c1 HTTP 200: [{&quot;instancePath&quot;:&quot;/total&quot;,&quot;schemaPath&quot;:&quot;#/properties/total/type&quot;,&quot;keyword&quot;:&quot;type&quot;,&quot;params&quot;:{&quot;type&quot;:&quot;number&quot;},&quot;message&quot;:&quot;must be number&quot;}]
-AJV FAIL GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0 HTTP 200: [{&quot;instancePath&quot;:&quot;/total&quot;,&quot;schemaPath&quot;:&quot;#/properties/total/type&quot;,&quot;keyword&quot;:&quot;type&quot;,&quot;params&quot;:{&quot;type&quot;:&quot;number&quot;},&quot;message&quot;:&quot;must be number&quot;}]
-AJV FAIL GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0 HTTP 200: [{&quot;instancePath&quot;:&quot;/total&quot;,&quot;schemaPath&quot;:&quot;#/properties/total/type&quot;,&quot;keyword&quot;:&quot;type&quot;,&quot;params&quot;:{&quot;type&quot;:&quot;number&quot;},&quot;message&quot;:&quot;must be number&quot;}]
+AJV FAIL GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4 HTTP 200: [{&quot;instancePath&quot;:&quot;/total&quot;,&quot;schemaPath&quot;:&quot;#/properties/total/type&quot;,&quot;keyword&quot;:&quot;type&quot;,&quot;params&quot;:{&quot;type&quot;:&quot;number&quot;},&quot;message&quot;:&quot;must be number&quot;}]
+AJV FAIL GET /orders/1770ce83-ba02-41a0-a5ec-7ddb14ac0e49 HTTP 200: [{&quot;instancePath&quot;:&quot;/total&quot;,&quot;schemaPath&quot;:&quot;#/properties/total/type&quot;,&quot;keyword&quot;:&quot;type&quot;,&quot;params&quot;:{&quot;type&quot;:&quot;number&quot;},&quot;message&quot;:&quot;must be number&quot;}]
+AJV FAIL GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4 HTTP 200: [{&quot;instancePath&quot;:&quot;/total&quot;,&quot;schemaPath&quot;:&quot;#/properties/total/type&quot;,&quot;keyword&quot;:&quot;type&quot;,&quot;params&quot;:{&quot;type&quot;:&quot;number&quot;},&quot;message&quot;:&quot;must be number&quot;}]
+AJV FAIL GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4 HTTP 200: [{&quot;instancePath&quot;:&quot;/total&quot;,&quot;schemaPath&quot;:&quot;#/properties/total/type&quot;,&quot;keyword&quot;:&quot;type&quot;,&quot;params&quot;:{&quot;type&quot;:&quot;number&quot;},&quot;message&quot;:&quot;must be number&quot;}]
 
 Alcance: aserciones funcionales y validación de cuerpos. No certifica todas las operaciones o reglas de OpenAPI.</pre></html>

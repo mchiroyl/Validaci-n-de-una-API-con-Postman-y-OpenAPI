@@ -1,5 +1,5 @@
 VALIDACIÓN API PEDIDOS - manual
-Fecha UTC: 2026-10-04T05:17:55.670Z
+Fecha UTC: 2026-10-04T06:08:17.822Z
 Node v24.19.0 | Newman 6.2.2 | Colección 2.1.0 | OpenAPI 3.1.0
 Casos ejecutados: 12/12 | aprobados: 12 | fallidos: 0
 Solicitudes principales: 14 (12 casos + SETUP + CLEANUP)
@@ -76,7 +76,7 @@ TC09 | Acceso y modificación de pedido ajeno | HTTP 403
   PASS TC09 | código FORBIDDEN
   PASS TC09 | confirmación ajena prohibida
   PASS TC09 | esquema confirmación prohibida
-  PASS TC09 | lectura posterior disponible /orders/fe1909ef-d805-4d2e-8243-29bb33596a1a
+  PASS TC09 | lectura posterior disponible /orders/dbe9db08-1e4f-4d4b-865e-d3b178a2dae4
   PASS TC09 | esquema lectura autorizada B
   PASS TC09 | pedido ajeno sin efecto
 TC10 | Recurso inexistente | HTTP 404
@@ -89,7 +89,7 @@ TC11 | Confirmar borrador y verificar cambio | HTTP 200
   PASS TC11 | Content-Type JSON
   PASS TC11 | esquema Order
   PASS TC11 | primera confirmación
-  PASS TC11 | lectura posterior disponible /orders/5a58c4b2-d0f1-4847-9c0c-af7459c07569
+  PASS TC11 | lectura posterior disponible /orders/ea10358b-dfdd-431a-ad08-d24e11d70596
   PASS TC11 | esquema confirmación persistida
   PASS TC11 | efecto persistido
 TC12 | Repetir confirmación: efecto final idempotente | HTTP 200
@@ -98,7 +98,7 @@ TC12 | Repetir confirmación: efecto final idempotente | HTTP 200
   PASS TC12 | esquema Order
   PASS TC12 | esquema PUT repetido
   PASS TC12 | PUT repetido mantiene efecto único
-  PASS TC12 | lectura posterior disponible /orders/5a58c4b2-d0f1-4847-9c0c-af7459c07569
+  PASS TC12 | lectura posterior disponible /orders/ea10358b-dfdd-431a-ad08-d24e11d70596
   PASS TC12 | esquema lectura final
   PASS TC12 | lectura final mantiene efecto único
   PASS TC12 | lectura posterior disponible /orders?limit=20

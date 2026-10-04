@@ -54,6 +54,16 @@ Si la importación muestra **Secrets Detected** para el literal exacto `Bearer i
 
 Una captura de la colección importada acredita su configuración. Para evidenciar ejecución, debe mostrar el resumen del Runner y los resultados de las pruebas.
 
+## Postman CLI verificado
+
+La colección también se ejecutó con **Postman CLI 1.69.0**: doce casos, 25 peticiones, 91 aserciones y cero fallos. Instale Postman CLI desde https://learning.postman.com/docs/postman-cli/postman-cli-installation y mantenga la API iniciada.
+
+```powershell
+postman collection run postman/pedidos.postman_collection.json -e postman/local.postman_environment.json --no-report-events -r cli
+```
+
+El comando `npm run test:postman` reproduce la ejecución y verifica los doce IDs y el resumen. Si el ejecutable no está en PATH, configure POSTMAN_CLI_PATH con su ruta. La instalación local del agente se validó mediante firma Authenticode de Postman, Inc. No es necesario iniciar sesión para ejecutar estos archivos locales; los mensajes sobre credenciales corresponden a publicación en la nube. La salida comprobada es 0. Los informes están en `evidence/postman-cli.*`. Esta ejecución satisface la alternativa de Postman CLI de la rúbrica.
+
 ## Ejecución automatizada local
 
 Con la API iniciada, ejecute en otra terminal:
@@ -93,7 +103,7 @@ La corrección se realiza en la API, sin debilitar el contrato ni las aserciones
 
 ## Resultados registrados
 
-Ejecuciones locales del **3 de octubre de 2026**, con fechas UTC conservadas en los informes:
+Ejecuciones locales repetidas el **4 de octubre de 2026**, con fechas UTC conservadas en los informes:
 
 | Corrida | Casos | Aprobados | Fallidos | Aserciones fallidas | Salida |
 | --- | ---: | ---: | ---: | ---: | ---: |

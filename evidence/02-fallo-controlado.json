@@ -1,6 +1,6 @@
 {
   "label": "02-fallo-controlado",
-  "executedAt": "2026-10-04T05:48:48.880Z",
+  "executedAt": "2026-10-04T06:04:11.051Z",
   "timezone": "America/Guatemala",
   "node": "v24.19.0",
   "dependencies": {
@@ -311,7 +311,7 @@
           "passed": true
         },
         {
-          "name": "TC09 | lectura posterior disponible /orders/eb0883e3-5ec3-4572-a668-e6d8ea86f6c1",
+          "name": "TC09 | lectura posterior disponible /orders/1770ce83-ba02-41a0-a5ec-7ddb14ac0e49",
           "passed": true
         },
         {
@@ -372,7 +372,7 @@
           "passed": true
         },
         {
-          "name": "TC11 | lectura posterior disponible /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+          "name": "TC11 | lectura posterior disponible /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
           "passed": true
         },
         {
@@ -414,7 +414,7 @@
           "passed": true
         },
         {
-          "name": "TC12 | lectura posterior disponible /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+          "name": "TC12 | lectura posterior disponible /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
           "passed": true
         },
         {
@@ -732,7 +732,7 @@
           "passed": true
         },
         {
-          "name": "TC09 | lectura posterior disponible /orders/eb0883e3-5ec3-4572-a668-e6d8ea86f6c1",
+          "name": "TC09 | lectura posterior disponible /orders/1770ce83-ba02-41a0-a5ec-7ddb14ac0e49",
           "passed": true
         },
         {
@@ -789,7 +789,7 @@
           "passed": true
         },
         {
-          "name": "TC11 | lectura posterior disponible /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+          "name": "TC11 | lectura posterior disponible /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
           "passed": true
         },
         {
@@ -829,7 +829,7 @@
           "passed": true
         },
         {
-          "name": "TC12 | lectura posterior disponible /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+          "name": "TC12 | lectura posterior disponible /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
           "passed": true
         },
         {
@@ -968,7 +968,7 @@
       "errors": []
     },
     {
-      "operation": "GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+      "operation": "GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
       "status": 200,
       "valid": false,
       "errors": [
@@ -1008,31 +1008,31 @@
       "errors": []
     },
     {
-      "operation": "GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+      "operation": "GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
       "status": 401,
       "valid": true,
       "errors": []
     },
     {
-      "operation": "GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+      "operation": "GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
       "status": 401,
       "valid": true,
       "errors": []
     },
     {
-      "operation": "GET /orders/eb0883e3-5ec3-4572-a668-e6d8ea86f6c1",
+      "operation": "GET /orders/1770ce83-ba02-41a0-a5ec-7ddb14ac0e49",
       "status": 403,
       "valid": true,
       "errors": []
     },
     {
-      "operation": "PUT /orders/eb0883e3-5ec3-4572-a668-e6d8ea86f6c1/confirmation",
+      "operation": "PUT /orders/1770ce83-ba02-41a0-a5ec-7ddb14ac0e49/confirmation",
       "status": 403,
       "valid": true,
       "errors": []
     },
     {
-      "operation": "GET /orders/eb0883e3-5ec3-4572-a668-e6d8ea86f6c1",
+      "operation": "GET /orders/1770ce83-ba02-41a0-a5ec-7ddb14ac0e49",
       "status": 200,
       "valid": false,
       "errors": [
@@ -1054,13 +1054,13 @@
       "errors": []
     },
     {
-      "operation": "PUT /orders/da36041c-4010-4e73-95be-ecec7ce575b0/confirmation",
+      "operation": "PUT /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4/confirmation",
       "status": 200,
       "valid": true,
       "errors": []
     },
     {
-      "operation": "GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+      "operation": "GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
       "status": 200,
       "valid": false,
       "errors": [
@@ -1076,13 +1076,13 @@
       ]
     },
     {
-      "operation": "PUT /orders/da36041c-4010-4e73-95be-ecec7ce575b0/confirmation",
+      "operation": "PUT /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4/confirmation",
       "status": 200,
       "valid": true,
       "errors": []
     },
     {
-      "operation": "GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+      "operation": "GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
       "status": 200,
       "valid": false,
       "errors": [
@@ -1104,13 +1104,13 @@
       "errors": []
     },
     {
-      "operation": "DELETE /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+      "operation": "DELETE /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
       "status": 200,
       "valid": true,
       "errors": []
     },
     {
-      "operation": "GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+      "operation": "GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
       "status": 404,
       "valid": true,
       "errors": []
@@ -1130,25 +1130,25 @@
       "body": {
         "items": [
           {
-            "id": "f5db45e6-9d5d-4260-a00e-9a8516348d65",
+            "id": "0103474c-c2dd-4269-8f7f-6e345456bf65",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 1,
             "total": 25,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "64d84172-9993-4a6c-9c7f-f68ce3b44d08",
+            "id": "9ba70c89-7034-4406-bc8e-d1d48f72319f",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 2,
             "total": 50,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           }
         ],
@@ -1165,14 +1165,14 @@
       "body": {
         "items": [
           {
-            "id": "6d1d9e11-5d4e-419c-b152-711105dd77de",
+            "id": "1ba3836e-4f83-49a5-b2b3-db32495049fb",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 3,
             "total": 75,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           }
         ],
@@ -1198,14 +1198,14 @@
       "status": 201,
       "contentType": "application/json; charset=utf-8",
       "body": {
-        "id": "da36041c-4010-4e73-95be-ecec7ce575b0",
+        "id": "bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
         "owner": "usuario_a",
         "product": "CUADERNO",
         "quantity": 2,
         "total": 50,
         "status": "draft",
         "confirmationCount": 0,
-        "createdAt": "2026-10-04T05:48:47.200Z",
+        "createdAt": "2026-10-04T06:04:09.762Z",
         "confirmedAt": null
       }
     },
@@ -1216,47 +1216,47 @@
       "body": {
         "items": [
           {
-            "id": "f5db45e6-9d5d-4260-a00e-9a8516348d65",
+            "id": "0103474c-c2dd-4269-8f7f-6e345456bf65",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 1,
             "total": 25,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "64d84172-9993-4a6c-9c7f-f68ce3b44d08",
+            "id": "9ba70c89-7034-4406-bc8e-d1d48f72319f",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 2,
             "total": 50,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "6d1d9e11-5d4e-419c-b152-711105dd77de",
+            "id": "1ba3836e-4f83-49a5-b2b3-db32495049fb",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 3,
             "total": 75,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "da36041c-4010-4e73-95be-ecec7ce575b0",
+            "id": "bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 2,
             "total": 50,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:47.200Z",
+            "createdAt": "2026-10-04T06:04:09.762Z",
             "confirmedAt": null
           }
         ],
@@ -1267,18 +1267,18 @@
       }
     },
     {
-      "operation": "GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+      "operation": "GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
       "status": 200,
       "contentType": "application/json; charset=utf-8",
       "body": {
-        "id": "da36041c-4010-4e73-95be-ecec7ce575b0",
+        "id": "bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
         "owner": "usuario_a",
         "product": "CUADERNO",
         "quantity": 2,
         "total": "50",
         "status": "draft",
         "confirmationCount": 0,
-        "createdAt": "2026-10-04T05:48:47.200Z",
+        "createdAt": "2026-10-04T06:04:09.762Z",
         "confirmedAt": null
       }
     },
@@ -1300,47 +1300,47 @@
       "body": {
         "items": [
           {
-            "id": "f5db45e6-9d5d-4260-a00e-9a8516348d65",
+            "id": "0103474c-c2dd-4269-8f7f-6e345456bf65",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 1,
             "total": 25,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "64d84172-9993-4a6c-9c7f-f68ce3b44d08",
+            "id": "9ba70c89-7034-4406-bc8e-d1d48f72319f",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 2,
             "total": 50,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "6d1d9e11-5d4e-419c-b152-711105dd77de",
+            "id": "1ba3836e-4f83-49a5-b2b3-db32495049fb",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 3,
             "total": 75,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "da36041c-4010-4e73-95be-ecec7ce575b0",
+            "id": "bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 2,
             "total": 50,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:47.200Z",
+            "createdAt": "2026-10-04T06:04:09.762Z",
             "confirmedAt": null
           }
         ],
@@ -1368,47 +1368,47 @@
       "body": {
         "items": [
           {
-            "id": "f5db45e6-9d5d-4260-a00e-9a8516348d65",
+            "id": "0103474c-c2dd-4269-8f7f-6e345456bf65",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 1,
             "total": 25,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "64d84172-9993-4a6c-9c7f-f68ce3b44d08",
+            "id": "9ba70c89-7034-4406-bc8e-d1d48f72319f",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 2,
             "total": 50,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "6d1d9e11-5d4e-419c-b152-711105dd77de",
+            "id": "1ba3836e-4f83-49a5-b2b3-db32495049fb",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 3,
             "total": 75,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "da36041c-4010-4e73-95be-ecec7ce575b0",
+            "id": "bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 2,
             "total": 50,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:47.200Z",
+            "createdAt": "2026-10-04T06:04:09.762Z",
             "confirmedAt": null
           }
         ],
@@ -1419,7 +1419,7 @@
       }
     },
     {
-      "operation": "GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+      "operation": "GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
       "status": 401,
       "contentType": "application/json; charset=utf-8",
       "body": {
@@ -1430,7 +1430,7 @@
       }
     },
     {
-      "operation": "GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+      "operation": "GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
       "status": 401,
       "contentType": "application/json; charset=utf-8",
       "body": {
@@ -1441,7 +1441,7 @@
       }
     },
     {
-      "operation": "GET /orders/eb0883e3-5ec3-4572-a668-e6d8ea86f6c1",
+      "operation": "GET /orders/1770ce83-ba02-41a0-a5ec-7ddb14ac0e49",
       "status": 403,
       "contentType": "application/json; charset=utf-8",
       "body": {
@@ -1452,7 +1452,7 @@
       }
     },
     {
-      "operation": "PUT /orders/eb0883e3-5ec3-4572-a668-e6d8ea86f6c1/confirmation",
+      "operation": "PUT /orders/1770ce83-ba02-41a0-a5ec-7ddb14ac0e49/confirmation",
       "status": 403,
       "contentType": "application/json; charset=utf-8",
       "body": {
@@ -1463,18 +1463,18 @@
       }
     },
     {
-      "operation": "GET /orders/eb0883e3-5ec3-4572-a668-e6d8ea86f6c1",
+      "operation": "GET /orders/1770ce83-ba02-41a0-a5ec-7ddb14ac0e49",
       "status": 200,
       "contentType": "application/json; charset=utf-8",
       "body": {
-        "id": "eb0883e3-5ec3-4572-a668-e6d8ea86f6c1",
+        "id": "1770ce83-ba02-41a0-a5ec-7ddb14ac0e49",
         "owner": "usuario_b",
         "product": "CUADERNO",
         "quantity": 1,
         "total": "25",
         "status": "draft",
         "confirmationCount": 0,
-        "createdAt": "2026-10-04T05:48:46.794Z",
+        "createdAt": "2026-10-04T06:04:09.448Z",
         "confirmedAt": null
       }
     },
@@ -1490,67 +1490,67 @@
       }
     },
     {
-      "operation": "PUT /orders/da36041c-4010-4e73-95be-ecec7ce575b0/confirmation",
+      "operation": "PUT /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4/confirmation",
       "status": 200,
       "contentType": "application/json; charset=utf-8",
       "body": {
-        "id": "da36041c-4010-4e73-95be-ecec7ce575b0",
+        "id": "bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
         "owner": "usuario_a",
         "product": "CUADERNO",
         "quantity": 2,
         "total": 50,
         "status": "confirmed",
         "confirmationCount": 1,
-        "createdAt": "2026-10-04T05:48:47.200Z",
-        "confirmedAt": "2026-10-04T05:48:48.251Z"
+        "createdAt": "2026-10-04T06:04:09.762Z",
+        "confirmedAt": "2026-10-04T06:04:10.606Z"
       }
     },
     {
-      "operation": "GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+      "operation": "GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
       "status": 200,
       "contentType": "application/json; charset=utf-8",
       "body": {
-        "id": "da36041c-4010-4e73-95be-ecec7ce575b0",
+        "id": "bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
         "owner": "usuario_a",
         "product": "CUADERNO",
         "quantity": 2,
         "total": "50",
         "status": "confirmed",
         "confirmationCount": 1,
-        "createdAt": "2026-10-04T05:48:47.200Z",
-        "confirmedAt": "2026-10-04T05:48:48.251Z"
+        "createdAt": "2026-10-04T06:04:09.762Z",
+        "confirmedAt": "2026-10-04T06:04:10.606Z"
       }
     },
     {
-      "operation": "PUT /orders/da36041c-4010-4e73-95be-ecec7ce575b0/confirmation",
+      "operation": "PUT /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4/confirmation",
       "status": 200,
       "contentType": "application/json; charset=utf-8",
       "body": {
-        "id": "da36041c-4010-4e73-95be-ecec7ce575b0",
+        "id": "bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
         "owner": "usuario_a",
         "product": "CUADERNO",
         "quantity": 2,
         "total": 50,
         "status": "confirmed",
         "confirmationCount": 1,
-        "createdAt": "2026-10-04T05:48:47.200Z",
-        "confirmedAt": "2026-10-04T05:48:48.251Z"
+        "createdAt": "2026-10-04T06:04:09.762Z",
+        "confirmedAt": "2026-10-04T06:04:10.606Z"
       }
     },
     {
-      "operation": "GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+      "operation": "GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
       "status": 200,
       "contentType": "application/json; charset=utf-8",
       "body": {
-        "id": "da36041c-4010-4e73-95be-ecec7ce575b0",
+        "id": "bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
         "owner": "usuario_a",
         "product": "CUADERNO",
         "quantity": 2,
         "total": "50",
         "status": "confirmed",
         "confirmationCount": 1,
-        "createdAt": "2026-10-04T05:48:47.200Z",
-        "confirmedAt": "2026-10-04T05:48:48.251Z"
+        "createdAt": "2026-10-04T06:04:09.762Z",
+        "confirmedAt": "2026-10-04T06:04:10.606Z"
       }
     },
     {
@@ -1560,48 +1560,48 @@
       "body": {
         "items": [
           {
-            "id": "f5db45e6-9d5d-4260-a00e-9a8516348d65",
+            "id": "0103474c-c2dd-4269-8f7f-6e345456bf65",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 1,
             "total": 25,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "64d84172-9993-4a6c-9c7f-f68ce3b44d08",
+            "id": "9ba70c89-7034-4406-bc8e-d1d48f72319f",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 2,
             "total": 50,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "6d1d9e11-5d4e-419c-b152-711105dd77de",
+            "id": "1ba3836e-4f83-49a5-b2b3-db32495049fb",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 3,
             "total": 75,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "da36041c-4010-4e73-95be-ecec7ce575b0",
+            "id": "bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 2,
             "total": 50,
             "status": "confirmed",
             "confirmationCount": 1,
-            "createdAt": "2026-10-04T05:48:47.200Z",
-            "confirmedAt": "2026-10-04T05:48:48.251Z"
+            "createdAt": "2026-10-04T06:04:09.762Z",
+            "confirmedAt": "2026-10-04T06:04:10.606Z"
           }
         ],
         "page": 1,
@@ -1611,16 +1611,16 @@
       }
     },
     {
-      "operation": "DELETE /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+      "operation": "DELETE /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
       "status": 200,
       "contentType": "application/json; charset=utf-8",
       "body": {
         "deleted": true,
-        "id": "da36041c-4010-4e73-95be-ecec7ce575b0"
+        "id": "bc3852ca-19b8-4f26-a423-5fcdfbd0cab4"
       }
     },
     {
-      "operation": "GET /orders/da36041c-4010-4e73-95be-ecec7ce575b0",
+      "operation": "GET /orders/bc3852ca-19b8-4f26-a423-5fcdfbd0cab4",
       "status": 404,
       "contentType": "application/json; charset=utf-8",
       "body": {
@@ -1637,36 +1637,36 @@
       "body": {
         "items": [
           {
-            "id": "f5db45e6-9d5d-4260-a00e-9a8516348d65",
+            "id": "0103474c-c2dd-4269-8f7f-6e345456bf65",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 1,
             "total": 25,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "64d84172-9993-4a6c-9c7f-f68ce3b44d08",
+            "id": "9ba70c89-7034-4406-bc8e-d1d48f72319f",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 2,
             "total": 50,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           },
           {
-            "id": "6d1d9e11-5d4e-419c-b152-711105dd77de",
+            "id": "1ba3836e-4f83-49a5-b2b3-db32495049fb",
             "owner": "usuario_a",
             "product": "CUADERNO",
             "quantity": 3,
             "total": 75,
             "status": "draft",
             "confirmationCount": 0,
-            "createdAt": "2026-10-04T05:48:46.794Z",
+            "createdAt": "2026-10-04T06:04:09.448Z",
             "confirmedAt": null
           }
         ],

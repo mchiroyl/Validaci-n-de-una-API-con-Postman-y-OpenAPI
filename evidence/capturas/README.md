@@ -4,7 +4,7 @@
 
 `terminal/01.png` a `terminal/07.png` son siete originales aportadas por el estudiante. Muestran instalación y API, TC01..TC12, lecturas posteriores, limpieza y resumen de 91 aserciones. No se modificaron. La instalación de terminal/01.png muestra 19 avisos anteriores a los overrides; la auditoría actual registra 7 entradas, no cero. Las capturas de terminal son anteriores a esa actualización y no se atribuyen a la ejecución posterior.
 
-GitHub Actions está pendiente de publicación y ejecución real; no existe una captura de Actions y no se creó una imagen simulada.
+GitHub Actions se ejecutó y sus capturas originales se describen al final de este archivo.
 
 Las cuatro imágenes JPG fueron tomadas en el navegador integrado del visor local de `scripts/capture_server.mjs`. El visor lee los informes JSON reales sanitizados de Newman; no crea resultados ni se presenta como interfaz de Postman Desktop.
 
@@ -16,3 +16,11 @@ Las cuatro imágenes JPG fueron tomadas en el navegador integrado del visor loca
 Las capturas omiten sesiones y cabeceras Authorization. Los identificadores ajenos se muestran como `{foreignId}` para centrar la evidencia en permisos, y no son necesarios para reproducir una corrida. SETUP genera IDs nuevos.
 
 Están incorporadas en `entrega/informe.docx`, con pies de figura y explicación. Si repite las pruebas y desea sustituir la evidencia del informe, vuelva a capturar los resultados de esa nueva corrida; no reutilice las imágenes para afirmar una ejecución distinta.
+
+## GitHub Actions
+
+actions/01.png a actions/04.png son originales del estudiante de la ejecución 37181153765 (commit a315735). El Word incluye 01 (API y contrato aprobado) y 04 (auditoría con siete entradas y salida 1). 02 y 03 amplían el mismo registro. No se interpreta el éxito funcional como auditoría aprobada.
+
+## Ejecuciones actuales
+
+actual/ contiene capturas tomadas por el agente el 4 de octubre de 2026 del visor local de informes reales: fallo, corrección, permisos y Postman CLI. La imagen de CLI muestra el registro de su ejecución real; no es una ventana de Postman Desktop ni un terminal simulado. Los resultados están en los JSON y TXT correspondientes.

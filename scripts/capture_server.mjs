@@ -8,6 +8,14 @@ const shell = (title, content) => `<!doctype html><html lang="es"><meta charset=
 const server = createServer(async(req,res)=>{
   try {
     const path = new URL(req.url,'http://127.0.0.1').pathname;
+    if(path === '/postman-cli') {
+      const r = JSON.parse(await readFile('evidence/postman-cli.json','utf8'));
+      const log = await readFile('evidence/postman-cli.txt','utf8');
+      const summary = log.slice(log.indexOf('-------------------------------------------------------------------'));
+      const content = `<div class="meta">Postman CLI ${escape(r.version)} | ${escape(r.executedAt)}</div><p class="summary">${escape(r.cases)} casos | ${escape(r.assertions)} aserciones | ${escape(r.failedAssertions)} fallidas | salida ${escape(r.exitCode)}</p><p>${escape(r.ids.join(' · '))}</p><pre>${escape(summary)}</pre><p>Vista del registro real de Postman CLI. Ejecución local sin publicación de resultados en Postman Cloud; no es una captura de Postman Desktop.</p>`;
+      res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'});
+      res.end(shell('Colección ejecutada con Postman CLI',content).replace('Captura del informe local de Newman.','Captura del informe local de Postman CLI.'));return;
+    }
     if(!routes[path]) {res.writeHead(404);res.end('Not found');return;}
     const report = JSON.parse(await readFile(`evidence/${routes[path]}.json`,'utf8'));
     const time = new Date(report.executedAt).toLocaleString('es-GT',{timeZone:'America/Guatemala',hour12:false});

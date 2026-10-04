@@ -1,0 +1,187 @@
+No authorization data found. Please use the `postman login` command.
+Refer:https://learning.postman.com/docs/postman-cli/postman-cli-options/#postman-login
+
+Running your collection...
+postman
+
+Pedidos | 12 casos de contrato y reglas
+
+Root SETUP | datos limpios y sesiones efímeras
+
+  POST http://127.0.0.1:3000/__demo/prepare [200 OK, 586 B, 32 ms]
+  Pass  SETUP | estado HTTP 200
+  Pass  SETUP | Content-Type JSON
+  Pass  SETUP | esquema Fixture
+  Pass  SETUP | 3 propios y 1 ajeno
+
+Root TC01 | Paginación válida y aislamiento
+
+  GET http://127.0.0.1:3000/orders?page=1&limit=2 [200 OK, 674 B, 6 ms]
+  Pass  TC01 | estado HTTP 200
+  Pass  TC01 | Content-Type JSON
+  Pass  TC01 | esquema OrderPage
+  Pass  TC01 | primera página y propietario
+  GET http://127.0.0.1:3000/orders?page=2&limit=2 [200 OK, 466 B, 6 ms]
+  Pass  TC01 | lectura posterior disponible /orders?page=2&limit=2
+  Pass  TC01 | esquema segunda página
+  Pass  TC01 | segunda página completa sin duplicados
+
+Root TC02 | Página inválida
+
+  GET http://127.0.0.1:3000/orders?page=0&limit=2 [400 Bad Request, 299 B, 4 ms]
+  Pass  TC02 | estado HTTP 400
+  Pass  TC02 | Content-Type JSON
+  Pass  TC02 | esquema Error
+  Pass  TC02 | código VALIDATION_ERROR
+
+Root TC03 | Crear pedido válido
+
+  POST http://127.0.0.1:3000/orders [201 Created, 471 B, 9 ms]
+  Pass  TC03 | estado HTTP 201
+  Pass  TC03 | Content-Type JSON
+  Pass  TC03 | esquema Order
+  Pass  TC03 | valores iniciales e importe calculado
+  Pass  TC03 | Location del recurso
+  GET http://127.0.0.1:3000/orders?limit=20 [200 OK, 1.07 KB, 4 ms]
+  Pass  TC03 | lectura posterior disponible /orders?limit=20
+  Pass  TC03 | esquema listado posterior
+  Pass  TC03 | sin creaciones adicionales
+
+Root TC04 | Consultar creación persistida
+
+  GET http://127.0.0.1:3000/orders/fe621e76-b28e-4754-9548-6384cbcb72b8 [200 OK, 410 B, 4 ms]
+  Pass  TC04 | estado HTTP 200
+  Pass  TC04 | Content-Type JSON
+  Pass  TC04 | esquema Order
+  Pass  TC04 | creación persistida correcta
+
+Root TC05 | Cantidad inválida sin efecto
+
+  POST http://127.0.0.1:3000/orders [400 Bad Request, 357 B, 4 ms]
+  Pass  TC05 | estado HTTP 400
+  Pass  TC05 | Content-Type JSON
+  Pass  TC05 | esquema Error
+  Pass  TC05 | código VALIDATION_ERROR
+  GET http://127.0.0.1:3000/orders?limit=20 [200 OK, 1.07 KB, 6 ms]
+  Pass  TC05 | lectura posterior disponible /orders?limit=20
+  Pass  TC05 | esquema listado posterior
+  Pass  TC05 | sin creaciones adicionales
+
+Root TC06 | Campo obligatorio ausente
+
+  POST http://127.0.0.1:3000/orders [400 Bad Request, 357 B, 6 ms]
+  Pass  TC06 | estado HTTP 400
+  Pass  TC06 | Content-Type JSON
+  Pass  TC06 | esquema Error
+  Pass  TC06 | código VALIDATION_ERROR
+  GET http://127.0.0.1:3000/orders?limit=20 [200 OK, 1.07 KB, 5 ms]
+  Pass  TC06 | lectura posterior disponible /orders?limit=20
+  Pass  TC06 | esquema listado posterior
+  Pass  TC06 | sin creaciones adicionales
+
+Root TC07 | Sin credenciales
+
+  GET http://127.0.0.1:3000/orders/fe621e76-b28e-4754-9548-6384cbcb72b8 [401 Unauthorized, 319 B, 5 ms]
+  Pass  TC07 | estado HTTP 401
+  Pass  TC07 | Content-Type JSON
+  Pass  TC07 | esquema Error
+  Pass  TC07 | código UNAUTHORIZED
+  Pass  TC07 | desafío Bearer
+
+Root TC08 | Credencial inválida
+
+  GET http://127.0.0.1:3000/orders/fe621e76-b28e-4754-9548-6384cbcb72b8 [401 Unauthorized, 319 B, 4 ms]
+  Pass  TC08 | estado HTTP 401
+  Pass  TC08 | Content-Type JSON
+  Pass  TC08 | esquema Error
+  Pass  TC08 | código UNAUTHORIZED
+  Pass  TC08 | desafío Bearer
+
+Root TC09 | Acceso y modificación de pedido ajeno
+
+  GET http://127.0.0.1:3000/orders/792fa0d4-84b5-4f96-b7c7-c1242af2e39a [403 Forbidden, 275 B, 2 ms]
+  Pass  TC09 | estado HTTP 403
+  Pass  TC09 | Content-Type JSON
+  Pass  TC09 | esquema Error
+  Pass  TC09 | código FORBIDDEN
+  PUT http://127.0.0.1:3000/orders/792fa0d4-84b5-4f96-b7c7-c1242af2e39a/confirmation [403 Forbidden, 275 B, 2 ms]
+  Pass  TC09 | confirmación ajena prohibida
+  Pass  TC09 | esquema confirmación prohibida
+  GET http://127.0.0.1:3000/orders/792fa0d4-84b5-4f96-b7c7-c1242af2e39a [200 OK, 410 B, 3 ms]
+  Pass  TC09 | lectura posterior disponible /orders/792fa0d4-84b5-4f96-b7c7-c1242af2e39a
+  Pass  TC09 | esquema lectura autorizada B
+  Pass  TC09 | pedido ajeno sin efecto
+
+Root TC10 | Recurso inexistente
+
+  GET http://127.0.0.1:3000/orders/00000000-0000-4000-8000-000000000000 [404 Not Found, 271 B, 2 ms]
+  Pass  TC10 | estado HTTP 404
+  Pass  TC10 | Content-Type JSON
+  Pass  TC10 | esquema Error
+  Pass  TC10 | código NOT_FOUND
+
+Root TC11 | Confirmar borrador y verificar cambio
+
+  PUT http://127.0.0.1:3000/orders/fe621e76-b28e-4754-9548-6384cbcb72b8/confirmation [200 OK, 436 B, 6 ms]
+  Pass  TC11 | estado HTTP 200
+  Pass  TC11 | Content-Type JSON
+  Pass  TC11 | esquema Order
+  Pass  TC11 | primera confirmación
+  GET http://127.0.0.1:3000/orders/fe621e76-b28e-4754-9548-6384cbcb72b8 [200 OK, 436 B, 3 ms]
+  Pass  TC11 | lectura posterior disponible /orders/fe621e76-b28e-4754-9548-6384cbcb72b8
+  Pass  TC11 | esquema confirmación persistida
+  Pass  TC11 | efecto persistido
+
+Root TC12 | Repetir confirmación: efecto final idempotente
+
+  PUT http://127.0.0.1:3000/orders/fe621e76-b28e-4754-9548-6384cbcb72b8/confirmation [200 OK, 436 B, 2 ms]
+  Pass  TC12 | estado HTTP 200
+  Pass  TC12 | Content-Type JSON
+  Pass  TC12 | esquema Order
+  Pass  TC12 | esquema PUT repetido
+  Pass  TC12 | PUT repetido mantiene efecto único
+  GET http://127.0.0.1:3000/orders/fe621e76-b28e-4754-9548-6384cbcb72b8 [200 OK, 436 B, 3 ms]
+  Pass  TC12 | lectura posterior disponible /orders/fe621e76-b28e-4754-9548-6384cbcb72b8
+  Pass  TC12 | esquema lectura final
+  Pass  TC12 | lectura final mantiene efecto único
+  GET http://127.0.0.1:3000/orders?limit=20 [200 OK, 1.09 KB, 2 ms]
+  Pass  TC12 | lectura posterior disponible /orders?limit=20
+  Pass  TC12 | esquema listado posterior
+  Pass  TC12 | sin creaciones adicionales
+
+Root CLEANUP | eliminar pedido de la corrida y comprobar
+
+  DELETE http://127.0.0.1:3000/orders/fe621e76-b28e-4754-9548-6384cbcb72b8 [200 OK, 263 B, 4 ms]
+  Pass  CLEANUP | estado HTTP 200
+  Pass  CLEANUP | Content-Type JSON
+  Pass  CLEANUP | esquema Deleted
+  Pass  CLEANUP | eliminado ID actual
+  GET http://127.0.0.1:3000/orders/fe621e76-b28e-4754-9548-6384cbcb72b8 [404 Not Found, 271 B, 4 ms]
+  Pass  CLEANUP | lectura final 404
+  Pass  CLEANUP | esquema recurso eliminado
+  GET http://127.0.0.1:3000/orders?limit=20 [200 OK, 883 B, 3 ms]
+  Pass  CLEANUP | lectura posterior disponible /orders?limit=20
+  Pass  CLEANUP | esquema limpieza
+  Pass  CLEANUP | vuelve al estado inicial
+
+-------------------------------------------------------------------
+|                         |          executed |            failed |
+--------------------------+-------------------+--------------------
+|              iterations |                 1 |                 0 |
+--------------------------+-------------------+--------------------
+|                requests |                25 |                 0 |
+--------------------------+-------------------+--------------------
+|            test-scripts |                14 |                 0 |
+--------------------------+-------------------+--------------------
+|      prerequest-scripts |                 0 |                 0 |
+--------------------------+-------------------+--------------------
+|              assertions |                91 |                 0 |
+-------------------------------------------------------------------
+| total run duration: 1680 ms                                     |
+-------------------------------------------------------------------
+| total data received: 7.59 KB (approx)                           |
+-------------------------------------------------------------------
+| average response time: 5 ms [min: 2 ms, max: 32 ms, s.d.: 5 ms] |
+-------------------------------------------------------------------
+Postman credentials are required for publishing run details to Postman cloud.
+Please specify it by using the `postman login` command

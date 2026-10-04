@@ -1,0 +1,25 @@
+{
+  "executedAt": "2026-10-04T06:09:32.451Z",
+  "version": "1.69.0",
+  "command": "postman collection run postman/pedidos.postman_collection.json -e postman/local.postman_environment.json --no-report-events -r cli",
+  "ids": [
+    "TC01",
+    "TC02",
+    "TC03",
+    "TC04",
+    "TC05",
+    "TC06",
+    "TC07",
+    "TC08",
+    "TC09",
+    "TC10",
+    "TC11",
+    "TC12"
+  ],
+  "cases": 12,
+  "assertions": 91,
+  "failedAssertions": 0,
+  "exitCode": 0,
+  "verified": true,
+  "cloudUpload": false
+}

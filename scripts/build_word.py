@@ -116,7 +116,7 @@ p('Requisitos verificados: Node 24.19.0, npm 11.17.0 y Newman 6.2.2. Formatos: c
 p('Postman verifica estados, cuerpos, reglas y efectos. Swagger Parser valida el documento OpenAPI y Ajv 2020 valida los cuerpos observados por operación y estado. Esto no constituye validación integral de todas las peticiones, cabeceras y parámetros OpenAPI. No se cubren carga ni autenticación productiva.')
 p('Uso de IA y revisión antes de entregar','Heading 2')
 p('Codex apoyó diseño, código, contrato y pruebas, y ejecutó los resultados mostrados. El estudiante aportó capturas originales de su ejecución en terminal; también se conserva el visor de informes para el fallo controlado. Los datos de prueba son sintéticos y las sesiones están excluidas. Falta completar la declaración personal de comprensión y revisión.')
-p('Los enlaces de repositorio y video son los proporcionados. Antes de exportar el PDF y entregar en Canvas, comprobar que el repositorio contiene los archivos y que el docente puede reproducir el video de máximo tres minutos.')
+p('El proyecto está publicado en el repositorio público indicado. El acceso del docente al video, su contenido y su duración máxima de tres minutos siguen pendientes de verificación. El informe conserva resultados funcionales aprobados y la limitación de seguridad observada.')
 
 doc.add_page_break()
 p('Evidencia de ejecución y permisos','Heading 1')
@@ -126,23 +126,29 @@ picture('terminal/07.png','Figura 2. Captura original: 25 solicitudes, 14 script
 doc.add_page_break()
 p('Incompatibilidad detectada y corrección','Heading 1')
 p('El defecto real convierte total a texto en GET /orders/{id}, mientras OpenAPI exige un número. TC04 falla aunque HTTP sea 200. También fallan lecturas posteriores de TC09, TC11 y TC12. Se conserva el parche y se restaura la fuente sin modificar el contrato.')
-picture('02-fallo-controlado.jpg','Figura 3. Cambio local incompatible y fallo de la aserción de esquema TC04.',width=6.0)
+picture('actual/fallo.jpg','Figura 3. Cambio local incompatible y fallo de la aserción de esquema TC04.',width=6.0)
 p('Efecto final idempotente','Heading 2')
 p('La corrección se ejecutó desde SETUP limpio: 12/12 casos aprobados. En TC12, repetir el PUT conserva fecha, contador persistido 1, Q50 y el mismo conjunto de cuatro pedidos propios. Las lecturas posteriores verifican el efecto final.')
-picture('03-corregida.jpg','Figura 4. Resumen de la corrida corregida y extracto de TC04, TC11 y TC12 con lectura final persistida.',width=6.0)
+picture('actual/corregida.jpg','Figura 4. Resumen de la corrida corregida y extracto de TC04, TC11 y TC12 con lectura final persistida.',width=6.0)
 
 p('Idempotencia, seguridad y pendientes','Heading 1').paragraph_format.page_break_before = True
 picture('terminal/06.png','Figura 5. Captura original del estudiante: repetición de PUT, lectura final, verificación del listado y limpieza.',width=6.0)
 p('Revisión de dependencias','Heading 2')
 p('La instalación original mostró 19 avisos (uno crítico). Después de actualizar dependencias compatibles, npm audit registra 7 entradas: 6 altas y 1 moderada, sin críticas. Pertenecen al árbol de Newman; la API no usa dependencias npm de producción. Esta reducción no equivale a resolver todos los avisos. Se conserva el resultado íntegro en evidence/security/npm-audit.json.')
 p('Las capturas de terminal documentan la ejecución anterior a esta actualización. La colección volvió a ejecutarse después del cambio: base y corrección aprobaron 12/12 y 91 aserciones; el defecto produjo 4 casos fallidos. Los informes JSON/TXT contienen las fechas actuales.')
-p('Pendiente antes de entregar','Heading 2')
-p('Resolver los avisos de seguridad restantes antes de publicar bajo la condición solicitada; ejecutar GitHub Actions y añadir su captura real; comprobar acceso y duración del video; completar revisión personal; exportar este Word a PDF y entregar en Canvas. No se presentan capturas de Actions porque todavía no existe una ejecución publicada verificada.')
+p('Checklist actualizado','Heading 2')
+p('COMPLETO: API local y dos usuarios; OpenAPI 3.1; matriz de doce casos; colección y ambiente vacío; paginación, permisos, datos inválidos y efecto idempotente; fallo controlado y corrección; README y publicación en GitHub; evidencia funcional aprobada en Actions; declaración de apoyo de IA.')
+p('PENDIENTE: comprobar acceso, contenido y duración del video; completar la declaración de revisión personal; exportar este Word a PDF y subirlo a Canvas. La alternativa de Postman CLI se ejecutó y documentó con 12 casos y 91 aserciones aprobadas. La auditoría de dependencias permanece fallida por siete entradas; no se declara seguridad completamente resuelta.')
 
-p('Colección importada en Postman','Heading 1').paragraph_format.page_break_before = True
-p('Las siguientes capturas originales del estudiante muestran la colección importada y sus solicitudes configuradas. Complementan la evidencia de Newman. No muestran una ejecución del Collection Runner, respuestas ni aserciones aprobadas. En ambas aparece No environment; falta seleccionar el ambiente local antes de ejecutar.')
-picture('postman/01.png','Figura 6. Postman: colección importada con SETUP, TC01 a TC12 y CLEANUP; instrucciones de uso y alcance de los esquemas.',width=6.5)
-picture('postman/07.png','Figura 7. Postman: solicitudes PUT de TC11 y TC12 y DELETE de limpieza configuradas con variables. La configuración por sí sola no demuestra el efecto idempotente.',width=6.5)
+p('Ejecución con Postman CLI','Heading 1').paragraph_format.page_break_before = True
+p('Postman CLI 1.69.0 ejecutó la colección local el 4 de octubre de 2026: doce casos, 25 peticiones y 91 aserciones aprobadas; salida 0. Se comprobó la firma digital del ejecutable oficial (Postman, Inc.). Esta ejecución cumple la alternativa de Postman CLI de la rúbrica.')
+p('Reproducción: con la API iniciada y Postman CLI instalado, ejecutar npm run test:postman. Los informes postman-cli.json y postman-cli.txt conservan la versión, los doce IDs y el resultado. No se inició sesión ni se publicaron resultados en Postman Cloud; el mensaje sobre credenciales se refiere a esa publicación.')
+picture('actual/postman-cli.jpg','Figura 6. Captura del visor del registro real de Postman CLI. No representa Postman Desktop. Los doce IDs y el resumen se contrastaron con el registro original.',width=6.0)
+
+p('Ejecución en GitHub Actions','Heading 1').paragraph_format.page_break_before = True
+p('Ejecución 37181153765, commit a315735. El trabajo API y contrato aprobó; Seguridad de dependencias falló por npm audit. El estado global es Failure. Actions es una extensión opcional de la rúbrica. Las capturas originales 01 y 04 resumen ambos resultados; las otras dos muestran detalles repetidos y se conservan como respaldo.')
+picture('actions/01.png','Figura 7. Trabajo funcional aprobado: instalación, casos y detector de incompatibilidad, con evidencia sanitizada conservada.',width=6.5)
+picture('actions/04.png','Figura 8. Auditoría fallida: siete entradas (una moderada y seis altas), código de salida 1. Este fallo es de dependencias, distinto del defecto de esquema introducido para la tarea.',width=6.5)
 
 footer=section.footer.paragraphs[0]
 footer.alignment=WD_ALIGN_PARAGRAPH.RIGHT

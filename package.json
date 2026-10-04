@@ -17,7 +17,8 @@
     "verify": "npm run generate && npm test && npm run evidence",
     "delivery": "node scripts/delivery.mjs",
     "defect:on": "node scripts/defect.mjs on",
-    "defect:off": "node scripts/defect.mjs off"
+    "defect:off": "node scripts/defect.mjs off",
+    "test:postman": "node scripts/postman-cli.mjs"
   },
   "devDependencies": {
     "@apidevtools/swagger-parser": "13.1.0",
